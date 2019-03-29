@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_gray">#666666</color>
+    <color name="bt_bg_gray">#DFDFDF</color>
+    <color name="bg_color02">#b3bdc7</color>
+    <color name="pink">#FEA3A3</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="yellow">#f7d321</color>
+    <color name="age_text">#777777</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#FFCCCCCC</color>
+
+    //黑色
+    <color name="black_25">#252525</color>
+    <color name="black_26">#262626</color>
+    <color name="black_66">#666666</color>
+    <color name="black_99">#999999</color>
+    <color name="black_f2">#f2f2f2</color>
+    <color name="black_e5">#e5e5e5</color>
+    <color name="lightgrey">#D3D3D3</color> <!--亮灰色 -->
+
+    <color name="text_red_start">#FC9B9B</color>
+    <color name="text_red_end">#FFF2F2</color>
+
+    <color name="text_yellow_start">#FFD38E</color>
+    <color name="text_yellow_end">#FFF8EC</color>
+
+    <color name="text_bule_start">#73E8FF</color>
+    <color name="text_bule_end">#E5FCFF</color>
+
+    <color name="text_gray_start">#D4D8D8</color>
+    <color name="text_gray_end">#F7F8F8</color>
+</resources>

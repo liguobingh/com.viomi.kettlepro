@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightgrey" >
+
+    <include layout="@layout/um_view_title_bar_setting" />
+
+    <LinearLayout
+        android:background="@color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:background="@color/white"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_alignParentLeft="true"
+                android:text="@string/um_mac_address"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/mac_text"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/lightgrey"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <View
+            android:id="@+id/title_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/title_bar"
+            android:background="#ffd0d0d1" />
+    </LinearLayout>
+
+</LinearLayout>

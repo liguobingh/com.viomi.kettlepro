@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:ordering="together">
+    <objectAnimator
+        android:propertyName="translationX"
+        android:valueFrom="@dimen/dp_80"
+        android:valueTo="@dimen/dp_150"></objectAnimator>
+
+    <objectAnimator
+        android:propertyName="translationY"
+        android:valueFrom="@dimen/dp_210"
+        android:valueTo="@dimen/dp_50">
+
+    </objectAnimator>
+</set>
