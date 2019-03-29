@@ -67,7 +67,7 @@ public class UMBluetoothManager {
 //	private UmTimeSeekbarView mUmTimeSeekbarView;
 //	private UMModelSetView mUMModelSetView;
     private TextView mStatusView;
-    private UMStatusInterface mStatusListener, statusListener;
+    private static UMStatusInterface mStatusListener, statusListener;
 
     private @HeatModel
     int mHeatModel;//当前模式
@@ -229,21 +229,18 @@ public class UMBluetoothManager {
     };
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent == null) {
                 Log.e(TAG, "BroadcastReceiver,intent null!");
                 return;
             }
-
             String receMac = intent.getStringExtra(XmBluetoothManager.KEY_DEVICE_ADDRESS);
             log.d(TAG, "BroadcastReceiver,mac=" + receMac);
             if (TextUtils.isEmpty(receMac) || !receMac.equalsIgnoreCase(mac)) {
                 Log.e(TAG, "BroadcastReceiver,receMac not macth!");
                 return;
             }
-
             String action = intent.getAction();
             log.d(TAG, "BroadcastReceiver,action=" + action);
             if (XmBluetoothManager.ACTION_CHARACTER_CHANGED.equalsIgnoreCase(action)) {
@@ -256,6 +253,10 @@ public class UMBluetoothManager {
                 }
             } else if (XmBluetoothManager.ACTION_CONNECT_STATUS_CHANGED.equalsIgnoreCase(action)) {
                 int status = intent.getIntExtra(XmBluetoothManager.KEY_CONNECT_STATUS, XmBluetoothManager.STATUS_UNKNOWN);
+                log.d("@@@@@", "1111111111status = " + status);
+                if (status == 32) {
+
+                }
                 processConnectStatusChanged(status);
             }
         }
@@ -378,8 +379,8 @@ public class UMBluetoothManager {
                     } else {
                         if (mStatusListener != null) {
                             mStatusListener.isOnlineChange(false);
+                            log.d("@@@@@", "BleConnectResponse,fail !");
                         }
-                        log.d("@@@@@", "BleConnectResponse,fail !");
                     }
                 }
             };
@@ -501,6 +502,7 @@ public class UMBluetoothManager {
     private void refreshView(byte[] data) {
         if (mStatusListener != null) {
             mStatusListener.onStatusDataReceive(data);
+            Log.d("@@@@@", "蓝牙refreshView: ");
         }
         if (statusListener != null) {
             statusListener.onStatusDataReceive(data);
@@ -1088,6 +1090,7 @@ public class UMBluetoothManager {
     }
 
     public void close() {
+        Log.d("@@@@@", "close:close close");
         mHandler = null;
         mStatusListener = null;
         statusListener = null;

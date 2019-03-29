@@ -335,9 +335,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         setTemp.setVisibility(View.GONE);
 
         bluStatus = XmBluetoothManager.getInstance().isBluetoothOpen();
-        log.d("@@@@@", "bluStatus:" + bluStatus);
+//        log.d("@@@@@", "bluStatus:" + bluStatus);
         connState = XmBluetoothManager.getInstance().getConnectStatus(mDeviceStat.mac);
-        log.d("@@@@@", "connState:" + connState);
+//        log.d("@@@@@", "connState:" + connState);
 
         if (bluStatus == false) {
             tvStatus.setText(getString(R.string.um_status_close));
@@ -374,7 +374,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             @Override
             public void isOnlineChange(boolean isOnline) {
                 mIsOnline = isOnline;
-                log.d(TAG, "mIsOnline=" + mIsOnline);
+                log.d("@@@@@", "mIsOnline=" + mIsOnline);
                 if (!mIsOnline) {
                     setOfflineView();
                 }
@@ -382,6 +382,21 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         });
     }
 
+    /**
+     * 离线时界面显示
+     */
+    private void setOfflineView() {
+        tvStatus.setText(getString(R.string.um_status_close));
+        tag1.setText(getString(R.string.un_status_disconnected));
+        tvTemp.setVisibility(View.GONE);
+        tvKeepTemp.setText(getResources().getText(R.string.um_cur_temp_default));
+        tvDuration.setText(getResources().getText(R.string.um_cur_temp_default));
+        bluOff.setVisibility(View.VISIBLE);
+        bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
+        tvMode.setText(getString(R.string.um_cur_temp_default));
+    }
+
+    // 初始化 温度刻度尺 视图
     private void initRulerView() {
 //        setTemp.setUnit(" ℃");// 设置“保温温度”显示单位
         setTemp.setMax(90);// 设置最高保温温度
@@ -937,15 +952,12 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         }
     }
 
-    private void setOfflineView() {
-    }
-
     /****
      * 刷新状态界面
      * @param data 接收蓝牙通知数据
      */
     private void refreshView(byte[] data) {
-//        log.d("@@@@@", "========data:" + data);
+        log.d("@@@@@", "========data:" + data);
         if (data == null) {
             log.d("@@@@@", "MSG_WHAT_STATUS_VARY,data null!");
             return;
