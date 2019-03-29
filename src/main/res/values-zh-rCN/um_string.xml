@@ -46,7 +46,12 @@
     <string name="button_confirm">确定</string>
 
 
-
+    <!--绑定设备，弹出协议 dialog 对话框-->
+    <string name="um_license_title">用户使用协议</string>
+    <string name="um_license_name">云米恒温水壶用户协议</string>
+    <string name="um_conceal_name">云米恒温水壶隐私政策</string>
+    <string name="um_licease">license.html</string>
+    <string name="um_policy">private.html</string>
 
 
 
@@ -160,25 +165,6 @@
     <string name="update_begin">开始升级</string>
     <string name="bluetooth_error">未开启蓝牙</string>
     <string name="um_string_errord100">1.水壶可能没有连接电源。\n2.手机可能没有开启蓝牙。\n3.手机与水壶的距离太远。\n\n解决办法：开启蓝牙，水壶连接电源，尽量使手机与水壶靠近，返回到“我的设备”列表，重新尝试。</string>
-
-    <string name="um_license_title">用户使用协议</string>
-    <string name="um_license_have_read">我已阅读</string>
-    <string name="um_license_agree">同意并继续</string>
-    <string name="um_license_name">云米恒温水壶用户协议</string>
-    <string name="um_conceal_name">云米恒温水壶隐私政策</string>
-
-    <string name="um_policy">PRIVACY_POLICY_ch.html</string>
-    <string name="um_licease">Software_License_ch.html</string>
-    <string name="um_policy_title">隐私政策</string>
-    <string name="um_licease_title">软件许可及服务协议</string>
-
-    <!--=================================================================================================-->
-
-    <string name="um_no_problem">There are {0} problems to be solved</string>
-
-    <string name="um_tag_coffee">Coffee</string>
-    <string name="um_tag_milk">Baby rice flour</string>
-    <string name="um_tag_tea">White tea</string>
 
 
 </resources>

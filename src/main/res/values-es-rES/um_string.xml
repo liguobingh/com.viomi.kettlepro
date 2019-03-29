@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="umimg">umimg</string>
+
+    <string name="um_license_name">Licencia de software y Acuerdo de servicio</string>
+    <string name="um_conceal_name">Política de privacidad</string>
+
+</resources>

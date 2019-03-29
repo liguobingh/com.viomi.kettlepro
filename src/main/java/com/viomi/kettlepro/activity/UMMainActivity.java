@@ -164,6 +164,8 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     private SeekBar timerPickerView;
     private float selectTimerValue;
 
+    String um_license, um_policy;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,33 +188,56 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 String uid = mSharedPreferences.getString("uid", "");
                 long time = mSharedPreferences.getLong("time", 0);
                 if (uid.equals("") && time == 0) {
-                    if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5)) {
-                        mHostActivity.showUserLicenseDialog(activity().getResources().getString(R.string.um_license_title),
-                                getResources().getString(R.string.um_license_name),
-                                Html.fromHtml(getResources().getString(R.string.um_license)),
-                                getResources().getString(R.string.um_conceal_name),
-                                Html.fromHtml(getResources().getString(R.string.um_ko_conceal)),
-                                new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mSharedPreferences.edit().putString("uid", XmPluginHostApi.instance().getAccountId()).apply();
-                                        mSharedPreferences.edit().putLong("time", System.currentTimeMillis()).apply();
-                                    }
-                                });
-                    } else {
-                        mHostActivity.showUserLicenseDialog(activity().getResources().getString(R.string.um_license_title),
-                                getResources().getString(R.string.um_license_name),
-                                Html.fromHtml(getResources().getString(R.string.um_license)),
-                                getResources().getString(R.string.um_conceal_name),
-                                Html.fromHtml(getResources().getString(R.string.um_conceal)),
-                                new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mSharedPreferences.edit().putString("uid", XmPluginHostApi.instance().getAccountId()).apply();
-                                        mSharedPreferences.edit().putLong("time", System.currentTimeMillis()).apply();
-                                    }
-                                });
+//                        mHostActivity.showUserLicenseHtmlDialog(activity().getResources().getString(R.string.um_license_title),
+//                                getResources().getString(R.string.um_license_name),
+//                                getResources().getAssets().open("license").toString(),
+//                                getResources().getString(R.string.um_conceal_name),
+//                                getResources().getAssets().open("private").toString(),
+//                                new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View v) {
+//                                        mSharedPreferences.edit().putString("uid", XmPluginHostApi.instance().getAccountId()).apply();
+//                                        mSharedPreferences.edit().putLong("time", System.currentTimeMillis()).apply();
+//                                    }
+//                                });
+
+                    String license = getString(R.string.um_licease);
+                    String policy = getString(R.string.um_policy);
+                    InputStream is = null;
+                    InputStream isL = null;
+                    try {
+                        is = getResources().getAssets().open(license);
+                        isL = getResources().getAssets().open(policy);
+
+                        byte[] bytes = new byte[is.available()];
+                        is.read(bytes);
+                        um_license = new String(bytes);
+
+                        byte[] bytesL = new byte[isL.available()];
+                        isL.read(bytesL);
+                        um_policy = new String(bytesL);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    // 显示隐私授权条例
+                    mHostActivity.showUserLicenseDialog(activity().getResources().getString(R.string.um_license_title),
+                            activity().getResources().getString(R.string.um_license_name),
+                            Html.fromHtml(um_license),
+                            activity().getResources().getString(R.string.um_conceal_name),
+                            Html.fromHtml(um_policy),
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mSharedPreferences.edit().putString("uid", XmPluginHostApi.instance().getAccountId()).apply();
+                                    mSharedPreferences.edit().putLong("time", System.currentTimeMillis()).apply();
+                                }
+                            });
                 }
             }
         }
@@ -922,12 +947,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     private void refreshView(byte[] data) {
 //        log.d("@@@@@", "========data:" + data);
         if (data == null) {
-            tvStatus.setText(getString(R.string.um_status_close));
-            tag1.setText(getString(R.string.un_status_disconnected));
-            tvTemp.setVisibility(View.GONE);
-            bluOff.setVisibility(View.VISIBLE);
-            bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
-            tvMode.setText(getString(R.string.um_cur_temp_default));
             log.d("@@@@@", "MSG_WHAT_STATUS_VARY,data null!");
             return;
         } else if (data.length < 7) {
@@ -1201,31 +1220,21 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 
         if (XmPluginHostApi.instance().getApiLevel() >= VERSION_LICENSE_ADD) {
             if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V2) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V3)
-                    || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5)
+                    || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V6)
                     || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V7)) {
                 if (mLicenseFile == null || mPrivacyFile == null) {//没加载过隐私协议文件
                     if (!isLicenseFileExist()) {//检测是否已经有隐私协议文件，有的话加载,没的话复制一份然后加载，先不考虑io操作阻塞
                         copyLicenseFile();
+                        Log.d("nbasdfg", "copyLicenseFile: ");
                     }
                 }
-                log.d(TAG, "openMoreMenu mLicenseFile:" + mLicenseFile.getAbsolutePath());
-                log.d(TAG, "openMoreMenu mPrivacyFile:" + mPrivacyFile.getAbsolutePath());
+                log.d("123456", "openMoreMenu mLicenseFile:" + mLicenseFile.getAbsolutePath());
+                log.d("123456", "openMoreMenu mPrivacyFile:" + mPrivacyFile.getAbsolutePath());
                 commonSettingIntent.putExtra("enableRemoveLicense", true);
                 commonSettingIntent.putExtra("licenseContentUri", mLicenseFile.getAbsolutePath());
                 commonSettingIntent.putExtra("privacyContentUri", mPrivacyFile.getAbsolutePath());
 //           commonSettingIntent.putExtra("licenseContentHtml",getHtmlContent("private_ko.html"));
 //           commonSettingIntent.putExtra("privacyContentHtml",getHtmlContent("private_ko.html"));
-            }
-        } else {
-            if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V2) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V3)
-                    || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V7)) {
-                commonSettingIntent.putExtra("enableRemoveLicense", true);
-                commonSettingIntent.putExtra("licenseContent", Html.fromHtml(activity().getResources().getString(R.string.um_license)));
-                commonSettingIntent.putExtra("privacyContent", Html.fromHtml(activity().getResources().getString(R.string.um_conceal)));
-            } else if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V6)) {
-                commonSettingIntent.putExtra("enableRemoveLicense", true);
-                commonSettingIntent.putExtra("licenseContent", Html.fromHtml(activity().getResources().getString(R.string.um_license)));
-                commonSettingIntent.putExtra("privacyContent", Html.fromHtml(activity().getResources().getString(R.string.um_ko_conceal)));
             }
         }
         hostActivity().openMoreMenu(items, true, REQUEST_MENUS_SECOND, commonSettingIntent);
@@ -1370,17 +1379,17 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         view.startAnimation(mShowAnimation);
     }
 
-    private void lisenseInit() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                copyLicenseFile();
-                if (mHandler != null) {
-                    mHandler.sendEmptyMessage(MSG_WHAT_INIT_LICENSE);
-                }
-            }
-        }).start();
-    }
+//    private void lisenseInit() {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                copyLicenseFile();
+//                if (mHandler != null) {
+//                    mHandler.sendEmptyMessage(MSG_WHAT_INIT_LICENSE);
+//                }
+//            }
+//        }).start();
+//    }
 
     /***
      * 复制隐私协议文件到sdcard里
@@ -1388,15 +1397,12 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     private void copyLicenseFile() {
         String licenseFileName = "license.html";
         String privacyFileName = "private.html";
-        if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V7)) {
-            privacyFileName = "private_ko.html";
-        }
         String rootPath = activity().getFilesDir().getAbsolutePath();
-        mLicenseFile = new File(rootPath, mDeviceStat.model + "_license.html");
-        mPrivacyFile = new File(rootPath, mDeviceStat.model + "_privacy.html");
+        mLicenseFile = new File(rootPath, mDeviceStat.model + "license.html");
+        mPrivacyFile = new File(rootPath, mDeviceStat.model + "privacy.html");
         try {
-            log.d(TAG, "copyLicenseFile mLicenseFile:" + mLicenseFile.getAbsolutePath());
-            log.d(TAG, "copyLicenseFile mPrivacyFile:" + mPrivacyFile.getAbsolutePath());
+//            log.d(TAG, "copyLicenseFile mLicenseFile:" + mLicenseFile.getAbsolutePath());
+//            log.d(TAG, "copyLicenseFile mPrivacyFile:" + mPrivacyFile.getAbsolutePath());
             FileUtil.copyFromAssets(getAssets(), licenseFileName, mLicenseFile.getAbsolutePath(), true);
             FileUtil.copyFromAssets(getAssets(), privacyFileName, mPrivacyFile.getAbsolutePath(), true);
         } catch (IOException e) {
