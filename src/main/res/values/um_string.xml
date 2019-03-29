@@ -52,12 +52,8 @@
     <string name="um_licease">license.html</string>
     <string name="um_policy">private.html</string>
 
-
 <!--================================================================================================-->
 
-    <string name="text_kettle_lift_up_upgrade_tips">请点击右上角图标，升级固件版本体验提壶记忆功能</string>
-    <string name="um_desc_keep_warm_time">保温</string>
-    <string name="um_text_hour">小时</string>
-    <string name="um_text_notime">无</string>
+
 
 </resources>

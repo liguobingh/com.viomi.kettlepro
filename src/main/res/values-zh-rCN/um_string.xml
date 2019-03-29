@@ -45,7 +45,6 @@
     <string name="button_cancel">取消</string>
     <string name="button_confirm">确定</string>
 
-
     <!--绑定设备，弹出协议 dialog 对话框-->
     <string name="um_license_title">用户使用协议</string>
     <string name="um_license_name">云米恒温水壶用户协议</string>
@@ -53,118 +52,10 @@
     <string name="um_licease">license.html</string>
     <string name="um_policy">private.html</string>
 
-
-
 <!--================================================================================================-->
-    <string name="um_common_mode">常用模式</string>
-    <string name="um_more_mode">更多模式</string>
-    <string name="um_all_mode">所有模式</string>
-    <string name="um_degree">Degree</string>
-    <string name="um_scenario_already_exists">This scenario is already in the common list</string>
-    <string name="um_select_common_mode">Please select the common mode to be replaced</string>
-    <string name="um_mode">Mode</string>
-    <string name="um_bluetooth_not_open">Bluetooth not opened </string>
-    <string name="um_bluetooth_not_connected">Bluetooth not connected </string>
-    <string name="um_bluetooth_offline">Bluetooth device is offline </string>
-    <string name="um_reconnecting">Reconnecting</string>
-
-    <string name="um_offline">离线</string>
-
-
-
-
-    <string name="um_error_not">正常</string>
-    <string name="um_error_heat">加热故障</string>
-    <string name="um_error_sensor">传感器故障</string>
-    <string name="um_error_parch">干烧</string>
-    <string name="um_error_unknow">未知错误</string>
-
-    <string name="um_set_custom_temp">保温设定</string>
-    <string name="um_string_mi_directions">使用贴士</string>
-
-    <string name="um_string_errord1">1.由于继电器故障不能断开或关闭线路，导致发热管断开，请您登录mi.com排查解决。</string>
-    <string name="um_string_errord2">1.原因可能为温度传感器开路/短路，请您登录mi.com排查解决。</string>
-    <string name="um_string_errord3">1.水壶可能没有放水启动或者水烧干了。\n解决办法：倒入合适的水量，重新进行加热使用。若按照此方法尝试多次仍然无法正常使用，请您登录mi.com排查解决。</string>
-
-    <string name="title_keep_warm_time">保温时长</string>
-    <string name="desc_keep_warm">持续保温&#160;</string>
-    <string name="util_keep_warm">小时</string>
-    <string name="time_seekbar_min_desc">1小时</string>
-    <string name="time_seekbar_max_desc">12小时</string>
-
-    <string name="title_keep_warm_temp">保温温度</string>
-    <string name="icon_more">更多</string>
-    <string name="icon_custom">自定义</string>
-
-    <string name="um_keep_warm_boil">煮沸降至保温温度</string>
-    <string name="um_keep_warm_not_boil">加热至保温温度</string>
-
-    <string name="text_scene_tea">适合冲泡白茶</string>
-    <string name="text_scene_coffee">适合冲咖啡</string>
-    <string name="text_scene_milk">适合冲奶粉</string>
-    <string name="text_scene_cereal">适合冲婴儿米粉</string>
-    <string name="text_scene_protiotics">益生菌冲剂</string>
-
-    <string name="um_scene_selected">该场景已在常用列表中</string>
-
-    <string name="text_scene_common_use">常用</string>
-    <string name="text_scene_all">全部</string>
-    <string name="title_choose_replace_scene">请选择被替换的常用场景</string>
-    <string name="um_desc_offline">设备未连接</string>
-
     <string name="text_kettle_lift_up_upgrade_tips">请点击右上角图标，升级固件版本体验提壶记忆功能</string>
-
-    <string name="um_keep_warm_boil_string1">煮沸后在</string>
-    <string name="um_keep_warm_boil_string2">℃保温</string>
-    <string name="um_keep_warm_not_boil_string1">加热至</string>
-    <string name="um_keep_warm_not_boil_string2">℃保温</string>
-    <string name="text_key_keep_warn">保温</string>
-    <string name="toast_idle_temp_set">请按水壶保温键开始工作</string>
-    <string name="um_status_keep_warm1">已保温</string>
-    <string name="um_status_keep_warm_h">小时</string>
-    <string name="um_status_keep_warm_m">分钟</string>
-    <string name="um_setup_fail">自定义设置失败！</string>
     <string name="um_desc_keep_warm_time">保温</string>
-    <string name="um_desc_keep_warm_not_boil">加热至</string>
-    <string name="um_desc_keep_warm_boil">煮沸后保温</string>
-    <string name="um_button_confirm">确定</string>
     <string name="um_text_hour">小时</string>
     <string name="um_text_notime">无</string>
-    <string name="um_start_string">请按自选键启动</string>
-    <string name="um_text_common_set">通用设置</string>
-    <string name="um_title_mode_title">保温模式设定</string>
-    <string name="um_title_direct_keep_warm_setting">倒水放回，按键后降温5℃内直接保温</string>
-    <string name="um_text_direct_keep_warm_setting">壶身拿开重新放回，水温在设定保温温度-5℃范围内，不加热到沸腾，直接保温</string>
-    <string name="um_working_status">当前状态</string>
-    <string name="um_reset_custom_temp">重新设置自定义温度</string>
-    <string name="um_boiling_string">直接煮沸</string>
-    <string name="um_had_complete">已完成</string>
-
-    <string name="warm_memory_note_title">温馨提醒</string>
-    <string name="um_desc_outtime">连接超时</string>
-    <string name="title_set">设置</string>
-    <string name="share">分享</string>
-    <string name="edit_custom">编辑常用</string>
-    <string name="device_connecting">正在连接设备...</string>
-
-    <string name="setting_help">使用帮助</string>
-    <string name="setting_feedback">反馈</string>
-    <string name="setting_rename">修改设备名称</string>
-    <string name="setting_location">位置管理</string>
-    <string name="setting_sharedevice">设备共享</string>
-    <string name="setting_update">检查固件升级</string>
-    <string name="setting_delete">解除连接</string>
-    <string name="setting_addtodesk">添加到桌面</string>
-    <string name="update_currentversion">当前版本</string>
-    <string name="update_latestversion">最新版本</string>
-    <string name="update_islatest">固件已经是最新版本</string>
-    <string name="update_ing">更新中...</string>
-    <string name="update_tips">更新中，请勿断电，等待升级完成之后再使用</string>
-    <string name="update_success">更新成功</string>
-    <string name="update_fail">更新失败</string>
-    <string name="update_begin">开始升级</string>
-    <string name="bluetooth_error">未开启蓝牙</string>
-    <string name="um_string_errord100">1.水壶可能没有连接电源。\n2.手机可能没有开启蓝牙。\n3.手机与水壶的距离太远。\n\n解决办法：开启蓝牙，水壶连接电源，尽量使手机与水壶靠近，返回到“我的设备”列表，重新尝试。</string>
-
 
 </resources>
