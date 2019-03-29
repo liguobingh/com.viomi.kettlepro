@@ -97,9 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-
-            </com.viomi.kettlepro.view.UMSwitchButton>
+                android:layout_centerVertical="true"/>
 
             <View
                 android:layout_width="match_parent"
