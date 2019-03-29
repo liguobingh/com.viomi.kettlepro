@@ -15,12 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.quintic.libota.bleGlobalVariables;
 import com.quintic.libota.otaManager;
 import com.viomi.kettlepro.R;
 import com.viomi.kettlepro.UMGlobalParam;
+import com.viomi.kettlepro.UMGlobalParam.HeatModel;
 import com.viomi.kettlepro.activity.UMGattAttributes;
 import com.viomi.kettlepro.interfaces.UMOtaInterface;
 import com.viomi.kettlepro.interfaces.UMStatusInterface;
@@ -39,7 +39,6 @@ import com.xiaomi.smarthome.device.api.BtFirmwareUpdateInfo;
 import com.xiaomi.smarthome.device.api.Callback;
 import com.xiaomi.smarthome.device.api.DeviceStat;
 import com.xiaomi.smarthome.device.api.XmPluginHostApi;
-import com.viomi.kettlepro.UMGlobalParam.HeatModel;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 
 public class UMBluetoothManager {
     private final static String TAG = "UMBluetoothManager";
@@ -92,6 +90,8 @@ public class UMBluetoothManager {
     private otaManager updateManager = new otaManager();
 
     public static UMBluetoothManager INSTANCE;
+
+    private int isOnActivity = 1;// 判斷是否在主界面
 
     public static UMBluetoothManager getInstance() {
         if (INSTANCE == null) {
@@ -254,8 +254,7 @@ public class UMBluetoothManager {
                 if (service != null && character != null) {
                     processNotify(service, character, value);
                 }
-            } else if (XmBluetoothManager.ACTION_CONNECT_STATUS_CHANGED
-                    .equalsIgnoreCase(action)) {
+            } else if (XmBluetoothManager.ACTION_CONNECT_STATUS_CHANGED.equalsIgnoreCase(action)) {
                 int status = intent.getIntExtra(XmBluetoothManager.KEY_CONNECT_STATUS, XmBluetoothManager.STATUS_UNKNOWN);
                 processConnectStatusChanged(status);
             }
@@ -265,12 +264,10 @@ public class UMBluetoothManager {
 
     /**
      * 处理网络状态变化
-     *
      * @param status
      */
     private void processConnectStatusChanged(int status) {
         log.d(TAG, "processConnectStatusChanged,status=" + status);
-
         if (status == XmBluetoothManager.STATUS_DISCONNECTED) {
             Log.d(TAG, "reconnect");
             if (mStatusListener != null) {
@@ -279,13 +276,25 @@ public class UMBluetoothManager {
             if (mOtaInterface != null) {
                 mOtaInterface.otaFail();
             }
-            connect();
+            if (isOnActivity == 1) {
+                connect();
+                Log.d("@@@@@", "connect运行了吗？");
+            } else if (isOnActivity == 0){
+            }
         } else {
             if (mStatusListener != null) {
                 mStatusListener.isOnlineChange(true);
             }
-
         }
+    }
+
+    /**
+     * 传递 撤销协议 主界面是否退出 标志位
+     * @param isOn
+     */
+    public void isOnMainActivity(int isOn) {
+        isOnActivity = isOn;
+        Log.d("@@@@@", "isOnActivity蓝牙 = " + isOnActivity);
     }
 
     /**
@@ -319,7 +328,6 @@ public class UMBluetoothManager {
         //	refreshView(value);
     }
 
-
     /***
      * 蓝牙管理初始化，启动连接管理和打开状态字notify
      * @param mDeviceStat
@@ -331,38 +339,20 @@ public class UMBluetoothManager {
         this.did = mDeviceStat.did;
         this.mStatusListener = mStatusInterface;
         registerBleNotifyReceiver();
-        //connect();
+//        connect();
         openStatusNotify();
         if (UMGlobalParam.isSaveStatusData) {
             initFile();
         }
-        Log.e(TAG, "model=" + this.model);
+        log.d(TAG, "model=" + this.model);
     }
 
     public void setStatusListener(UMStatusInterface statusListener) {
         this.statusListener = statusListener;
     }
 
-    /***
-     * 蓝牙管理初始化，启动连接管理和打开状态字notify
-     * @param mDeviceStat
-     */
-    public void init(Context context, DeviceStat mDeviceStat) {
-        this.context = context;
-        this.model = mDeviceStat.model;
-        this.mac = mDeviceStat.mac;
-        this.did = mDeviceStat.did;
-        registerBleNotifyReceiver();
-        //connect();
-        openStatusNotify();
-        if (UMGlobalParam.isSaveStatusData) {
-            initFile();
-        }
-    }
-
     private void registerBleNotifyReceiver() {
-        IntentFilter filter = new IntentFilter(
-                XmBluetoothManager.ACTION_CHARACTER_CHANGED);
+        IntentFilter filter = new IntentFilter(XmBluetoothManager.ACTION_CHARACTER_CHANGED);
         filter.addAction(XmBluetoothManager.ACTION_CONNECT_STATUS_CHANGED);
         context.registerReceiver(mReceiver, filter);
     }
@@ -383,32 +373,30 @@ public class UMBluetoothManager {
                 @Override
                 public void onResponse(int i, Bundle bundle) {
                     if (i == Code.REQUEST_SUCCESS) {
-                        Log.d(TAG, "BleConnectResponse,success !");
+                        log.d("@@@@@", "BleConnectResponse,success !");
                         openStatusNotify();
                     } else {
                         if (mStatusListener != null) {
                             mStatusListener.isOnlineChange(false);
                         }
-                        Log.e(TAG, "BleConnectResponse,fail !");
+                        log.d("@@@@@", "BleConnectResponse,fail !");
                     }
                 }
             };
         }
         XmBluetoothManager.getInstance().secureConnect(mac, connectResponse);
-
     }
 
     private void openStatusNotify() {
         //打开notify
         if (notifyResponse == null) {
             notifyResponse = new BleNotifyResponse() {
-
                 @Override
                 public void onResponse(int code, Void data) {
                     if (code == Code.REQUEST_SUCCESS) {
-                        Log.i(TAG, "BleNotifyResponse,success!");
+                        log.d(TAG, "BleNotifyResponse,success!");
                     } else {
-                        Log.e(TAG, "BleNotifyResponse fail,onResponse:code=" + code + ",data=" + data);
+                        log.d(TAG, "BleNotifyResponse fail,onResponse:code=" + code + ",data=" + data);
                     }
                 }
             };
@@ -425,7 +413,6 @@ public class UMBluetoothManager {
         XmBluetoothManager.getInstance().unnotify(mac, UMGattAttributes.SERVICE_UUID, UMGattAttributes.STATUS_UUID);
         XmBluetoothManager.getInstance().unnotify(mac, UMGattAttributes.SERVICE_UUID, UMGattAttributes.PUREWATER_UUID);
         XmBluetoothManager.getInstance().disconnect(mac, 30 * 1000);
-
     }
 
 //	/***
@@ -732,7 +719,6 @@ public class UMBluetoothManager {
     /***
      * 读取提壶记忆保温功能
      */
-
     public void readMemoryModeStatusSet() {
         XmBluetoothManager.getInstance().read(mac, UMGattAttributes.SERVICE_UUID, UMGattAttributes.STATUS_UUID, new BleReadResponse() {
 
@@ -756,7 +742,6 @@ public class UMBluetoothManager {
         return mBoilModeSet;
     }
 
-
     public int getMemoryStatusSet() {
         return mMemoryStatusSet;
     }
@@ -779,17 +764,17 @@ public class UMBluetoothManager {
      * 读取固件版本
      */
     public void readMcuVersion() {
+        log.d(TAG, "readMcuVersion atart" );
         XmBluetoothManager.getInstance().read(mac, UMGattAttributes.INFO_SERVICE_UUID, UMGattAttributes.MCU_VERSION_UUID, new BleReadResponse() {
-
             @Override
             public void onResponse(int code, byte[] data) {
-
+                log.d(TAG, "readMcuVersion success! version:");
                 try {
                     if (code == Code.REQUEST_SUCCESS) {
                         if (data != null && data.length > 0) {
                             String version = new String(data);
                             mUpgraderMsg.currentMcuVersion = version;
-                            Log.i(TAG, "readMcuVersion success! version:" + version);
+                            log.d(TAG, "readMcuVersion success! version:" + version);
                             upgradeCompare(version, mUpgraderMsg.latestMcuVersion);
                         }
                         return;
@@ -797,11 +782,10 @@ public class UMBluetoothManager {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.e(TAG, "readMcuVersion fail!");
+                log.d(TAG, "readMcuVersion fail!");
             }
         });
     }
-
 
     /***
      * 打开用水记录notify
@@ -945,7 +929,6 @@ public class UMBluetoothManager {
         });
     }
 
-
     public void setmUpgraderMsg(UMUpgraderMsg msg) {
         mUpgraderMsg = msg;
     }
@@ -1005,7 +988,6 @@ public class UMBluetoothManager {
     public void onOtaFail(UMOtaInterface otaInterface) {
         mOtaInterface = otaInterface;
     }
-
 
     public otaManager getOtaManager() {
         return updateManager;
@@ -1081,6 +1063,7 @@ public class UMBluetoothManager {
 
     private void upgradeCompare(String currentVersion, String latestMcuVersion) {
         Log.i(TAG, "currentVersion=" + currentVersion + ",latestMcuVersion=" + latestMcuVersion);
+
         if (currentVersion == null || latestMcuVersion == null) {
             return;
         }

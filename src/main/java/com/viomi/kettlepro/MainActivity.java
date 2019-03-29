@@ -69,7 +69,7 @@ public class MainActivity extends XmPluginBaseActivity implements StateChangedLi
     }
 
     public void refreshUI() {
-        mTitleView.setText(mDevice.getName());
+        mTitleView.setText(R.string.umtitle);
     }
 
     @Override

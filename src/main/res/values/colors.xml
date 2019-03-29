@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="bg_gray">#666666</color>
+    <color name="text_gray">#787878</color>
+    <color name="text_gray1">#929292</color>
+    <color name="text_tip">#686868</color>
     <color name="bt_bg_gray">#DFDFDF</color>
     <color name="bg_color02">#b3bdc7</color>
     <color name="pink">#FEA3A3</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#EE7676</color>
 
     <color name="yellow">#f7d321</color>
     <color name="age_text">#777777</color>
@@ -34,4 +38,12 @@
 
     <color name="text_gray_start">#D4D8D8</color>
     <color name="text_gray_end">#F7F8F8</color>
+
+    <!--提示框-->
+    <color name="dialog_bg">#FAFCFB</color>
+    <color name="divide_border">#EFF2F1</color>
+    <color name="text_content">#777777</color>
+    <color name="text_cancel">#929292</color>
+    <color name="text_ok">#51B2FB</color>
+
 </resources>

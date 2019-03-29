@@ -6,7 +6,6 @@
     <string name="um_status_close">閒置中</string>
     <string name="um_status_heating">加熱中</string>
     <string name="um_status_keep_warm">保溫中</string>
-    <string name="um_status_keep_warm_temp_down">降溫中</string>
     <string name="um_status_abnormal">異常</string>
     <string name="um_error_not">正常</string>
     <string name="um_error_heat">加熱故障</string>

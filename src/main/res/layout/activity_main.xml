@@ -9,101 +9,127 @@
         android:id="@+id/title_bar"
         layout="@layout/title_bar_transparent_black" />
 
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/rl_main"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_below="@+id/title_bar">-->
-
-    <TextView
+    <com.viomi.kettlepro.view.MiNumberItemTextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_bar"
+        android:layout_below="@id/title_bar"
         android:layout_centerHorizontal="true"
-        android:text="--"
+        android:text="@string/um_cur_temp_default"
+        android:textSize="@dimen/font_size_14sp"
         android:textColor="@color/bg_gray" />
 
-    <TextView
-        android:id="@+id/tag1"
+    <RelativeLayout
+        android:id="@+id/cur_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_status"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="80dp"
-        android:text="当前温度"
-        android:textColor="@color/bg_gray"
-        android:textSize="26sp" />
-    <!--android:textColor="@color/pink"-->
-    <com.viomi.kettlepro.view.MyTextView
-        android:id="@+id/tv_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tag1"
-        android:layout_alignRight="@+id/tag1"
-        android:layout_below="@+id/tag1"
-        android:gravity="center"
-        android:text="--"
-        android:textSize="60sp" />
+        android:layout_below="@id/tv_status">
+
+        <com.viomi.kettlepro.view.MiNumberItemTextView
+            android:id="@+id/tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/um_cur_temp"
+            android:textColor="@color/text_gray"
+            android:textSize="20sp" />
+
+        <com.viomi.kettlepro.view.MyTextView
+            android:id="@+id/tv_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tag1"
+            android:layout_below="@id/tag1"
+            android:gravity="center"
+            android:text="@string/um_cur_temp_default"
+            android:textSize="60sp" />
+
+        <ImageView
+            android:id="@+id/blu_off"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tag1"
+            android:layout_below="@id/tag1"
+            android:gravity="center"
+            android:src="@drawable/blu_disconected"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_mode"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@+id/tv_temp"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cur_temp"
+        android:layout_marginTop="30dp">
 
-        <TextView
+        <com.viomi.kettlepro.view.MiNumberItemTextView
             android:id="@+id/tv_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:text="自定义"
-            android:textColor="@color/bg_gray"
-            android:textSize="26sp" />
+            android:layout_marginLeft="36dp"
+            android:text="@string/um_cur_temp_default"
+            android:textColor="@color/text_gray1"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/iv_arrow01"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="22dp"
             android:src="@drawable/arrow" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_duration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_mode"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/rl_mode"
+        android:layout_marginTop="30dp">
 
-        <TextView
+        <com.viomi.kettlepro.view.MiNumberItemTextView
             android:id="@+id/tag2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="保温时长"
-            android:textColor="@color/bg_gray"
+            android:layout_marginLeft="36dp"
+            android:text="@string/um_temp_duration"
+            android:textColor="@color/text_gray1"
             android:textSize="16sp" />
 
-        <TextView
+        <com.viomi.kettlepro.view.MiNumberTextView
             android:id="@+id/tv_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tag2"
             android:layout_below="@+id/tag2"
-            android:text="--"
+            android:layout_marginTop="10dp"
+            android:text="@string/um_cur_temp_default"
             android:textColor="@color/black_25"
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <com.viomi.kettlepro.view.MiNumberItemTextView
+            android:id="@+id/water_time_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/tv_duration"
+            android:layout_toRightOf="@id/tv_duration"
+            android:paddingTop="30dp"
+            android:text="@string/time_unit"
+            android:textColor="@color/text_tip"
+            android:textSize="12sp" />
+
         <ImageView
             android:id="@+id/iv_arrow02"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="22dp"
@@ -114,33 +140,48 @@
         android:id="@+id/rl_temp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_duration"
-        android:layout_marginTop="10dp">
+        android:layout_below="@id/rl_duration"
+        android:layout_marginTop="30dp">
 
-        <TextView
+        <com.viomi.kettlepro.view.MiNumberItemTextView
             android:id="@+id/tag3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="保温温度"
-            android:textColor="@color/bg_gray"
+            android:layout_marginLeft="36dp"
+            android:text="@string/um_temp_value"
+            android:textColor="@color/text_gray1"
             android:textSize="16sp" />
 
-        <TextView
+        <com.viomi.kettlepro.view.MiNumberTextView
             android:id="@+id/tv_keep_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tag3"
             android:layout_below="@+id/tag3"
-            android:text="--"
+            android:layout_marginTop="10dp"
+            android:text="@string/um_cur_temp_default"
             android:textColor="@color/black_25"
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <com.viomi.kettlepro.view.MiNumberItemTextView
+            android:id="@+id/water_temp_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/tv_keep_temp"
+            android:layout_toRightOf="@id/tv_keep_temp"
+            android:paddingTop="20dp"
+            android:text="@string/um_temp_unit"
+            android:textColor="@color/text_tip"
+            android:textSize="12sp" />
+
         <ImageView
             android:id="@+id/iv_arrow03"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="22dp"
@@ -151,21 +192,22 @@
         android:id="@+id/v_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/rl_mode"
-        android:layout_below="@+id/title_bar" />
+        android:layout_above="@id/rl_mode"
+        android:layout_below="@id/title_bar" />
 
     <View
         android:id="@+id/v_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rl_temp" />
+        android:layout_below="@id/rl_temp" />
 
     <RelativeLayout
-        android:layout_width="@dimen/dp_110"
+        android:layout_width="110dp"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/rl_temp"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/tag1">
+        android:layout_alignTop="@id/cur_temp"
+        android:layout_alignBottom="@id/rl_temp"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_alignParentRight="true">
 
         <LinearLayout
             android:id="@+id/ll_mode"
@@ -174,65 +216,80 @@
             android:layout_marginRight="20dp"
             android:orientation="vertical">
 
-            <TextView
+            <com.viomi.kettlepro.view.MiNumberItemTextView
                 android:id="@+id/tv_coffee"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1.0"
                 android:drawableTop="@drawable/icon_coffee"
                 android:gravity="center"
-                android:text="咖啡"
-                android:textColor="@color/bg_gray" />
+                android:text="@string/text_coffee"
+                android:textSize="12sp"
+                android:textColor="@color/bg_gray"
+                android:drawablePadding="0dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="5dp"/>
 
-            <TextView
-                android:id="@+id/tv_rice"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_weight="1.0"
-                android:drawableTop="@drawable/icon_rice_flour"
-                android:gravity="center"
-                android:text="婴儿米粉"
-                android:textColor="@color/bg_gray" />
-
-            <TextView
+            <com.viomi.kettlepro.view.MiNumberItemTextView
                 android:id="@+id/tv_tea"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1.0"
                 android:drawableTop="@drawable/icon_tea"
                 android:gravity="center"
-                android:text="白茶"
-                android:textColor="@color/bg_gray" />
+                android:text="@string/text_tea"
+                android:textSize="12sp"
+                android:textColor="@color/bg_gray"
+                android:drawablePadding="1dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="6dp"/>
 
-            <TextView
-                android:id="@+id/tv_custom"
+            <com.viomi.kettlepro.view.MiNumberItemTextView
+                android:id="@+id/tv_rice"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1.0"
-                android:drawableTop="@drawable/icon_custom"
+                android:drawableTop="@drawable/icon_rice_flour"
                 android:gravity="center"
-                android:text="自定义"
-                android:textColor="@color/bg_gray" />
+                android:text="@string/text_cereal"
+                android:textSize="12sp"
+                android:textColor="@color/bg_gray"
+                android:drawablePadding="1dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="8dp"/>
+
+            <com.viomi.kettlepro.view.MiNumberItemTextView
+                android:id="@+id/tv_milk"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"
+                android:drawableTop="@drawable/icon_milk"
+                android:gravity="center"
+                android:text="@string/text_milk"
+                android:textSize="12sp"
+                android:textColor="@color/bg_gray"
+                android:drawablePadding="0dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="6dp"/>
         </LinearLayout>
 
-        <com.viomi.kettlepro.view.VerticalTimeRulerView
-            android:id="@+id/rv_time"
+        <!--<com.viomi.kettlepro.view.VerticalTimeRulerView-->
+            <!--android:id="@+id/set_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginRight="20dp" />-->
+
+        <com.viomi.kettlepro.view.VerticalRulerView
+            android:id="@+id/set_temp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp" />
 
-        <com.viomi.kettlepro.view.VerticalRulerView
-            android:id="@+id/rv_temp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="20dp" />
     </RelativeLayout>
 
     <include
         layout="@layout/view_status_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></include>
-    <!--</RelativeLayout>-->
 
 </RelativeLayout>

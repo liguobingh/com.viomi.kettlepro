@@ -1,15 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- 云米模块字符串 -->
     <string name="umimg">umimg</string>
-    <string name="umtitle">米家恒温电水壶</string>
-    <string name="um_offline">离线</string>
+    <string name="umtitle">云米恒温电水壶 Pro</string>
+    <string name="um_cur_temp">当前温度</string>
+    <string name="um_cur_temp_default">--</string>
+    <string name="um_custom_mode">自定义</string>
+    <string name="um_temp_duration">保温时长</string>
+    <string name="um_temp_value">保温温度</string>
+
+    <string name="text_protiotics">益生菌冲剂</string>
+    <string name="text_milk">奶粉</string>
+    <string name="text_cereal">婴儿米粉</string>
+    <string name="text_tea">白茶</string>
+    <string name="text_coffee">咖啡</string>
+
+    <string name="um_temp_unit">℃</string>
+    <string name="time_unit">h</string>
+
     <string name="um_status_close">空闲中</string>
     <string name="um_status_heating">加热中</string>
+    <string name="um_status_boiling">煮沸中</string>
     <string name="um_status_keep_warm">保温中</string>
-    <string name="um_status_keep_warm_temp_down">降温中</string>
-    <string name="um_status_abnormal">异常</string>
+    <string name="un_status_disconnected">蓝牙未连接</string>
+    <string name="um_status_bluetooth_close">蓝牙未开启</string>
+
     <string name="um_status_net_abnormal">网络异常</string>
+    <string name="um_status_abnormal">异常</string>
+
+    <string name="um_common_setting">通用设置</string>
+    <string name="um_device_info">设备信息</string>
+    <string name="um_mac_address">MAC 地址</string>
+
+    <string name="um_device_fun">功能设置</string>
+    <string name="um_device_hot">加热至保温温度</string>
+    <string name="um_device_boil">煮沸降至保温温度</string>
+    <string name="title_avoid_boil_repeat">防止重复煮沸</string>
+    <string name="um_boil_model_set_desc">降温未超过5℃，按保温键仅加热至保温温度</string>
+    <string name="title_kettle_lift_up">提壶记忆保温</string>
+    <string name="text_kettle_lift_up_desc">水壶提起放回，继续保温(45℃以上)</string>
+
+    <string name="toast_keep_warm_temp_set">工作中！\n 是否确认更改保温温度？</string>
+    <string name="text_kettle_lift_up_tips">空壶或水量过少时，请关闭保温功能，防止无水状态工作，影响水壶寿命。（此功能仅适用于4-35℃室温环境下）</string>
+    <string name="button_cancel">取消</string>
+    <string name="button_confirm">确定</string>
+
+
+
+
+
+
+<!--================================================================================================-->
+    <string name="um_common_mode">常用模式</string>
+    <string name="um_more_mode">更多模式</string>
+    <string name="um_all_mode">所有模式</string>
+    <string name="um_degree">Degree</string>
+    <string name="um_scenario_already_exists">This scenario is already in the common list</string>
+    <string name="um_select_common_mode">Please select the common mode to be replaced</string>
+    <string name="um_mode">Mode</string>
+    <string name="um_bluetooth_not_open">Bluetooth not opened </string>
+    <string name="um_bluetooth_not_connected">Bluetooth not connected </string>
+    <string name="um_bluetooth_offline">Bluetooth device is offline </string>
+    <string name="um_reconnecting">Reconnecting</string>
+
+    <string name="um_offline">离线</string>
+
+
+
+
     <string name="um_error_not">正常</string>
     <string name="um_error_heat">加热故障</string>
     <string name="um_error_sensor">传感器故障</string>
@@ -32,17 +89,9 @@
     <string name="title_keep_warm_temp">保温温度</string>
     <string name="icon_more">更多</string>
     <string name="icon_custom">自定义</string>
-    <string name="title_avoid_boil_repeat">防止重复煮沸</string>
 
     <string name="um_keep_warm_boil">煮沸降至保温温度</string>
     <string name="um_keep_warm_not_boil">加热至保温温度</string>
-    <string name="um_boil_model_set_desc">降温未超过5℃，按保温键仅加热至保温温度</string>
-
-    <string name="text_tea">白茶</string>
-    <string name="text_coffee">咖啡</string>
-    <string name="text_milk">奶粉</string>
-    <string name="text_cereal">婴儿米粉</string>
-    <string name="text_protiotics">益生菌冲剂</string>
 
     <string name="text_scene_tea">适合冲泡白茶</string>
     <string name="text_scene_coffee">适合冲咖啡</string>
@@ -56,21 +105,8 @@
     <string name="text_scene_all">全部</string>
     <string name="title_choose_replace_scene">请选择被替换的常用场景</string>
     <string name="um_desc_offline">设备未连接</string>
-    <string name="um_desc_boiling">沸腾中</string>
 
-    <string name="um_common_setting">通用设置</string>
-    <string name="um_device_info">设备信息</string>
-    <string name="um_device_fun">功能设置</string>
-    <string name="um_device_hot">加热至保温温度</string>
-    <string name="um_device_boil">煮沸降至保温温度</string>
-    <string name="um_mac_address">MAC地址</string>
-
-    <string name="title_kettle_lift_up">提壶记忆保温</string>
-    <string name="text_kettle_lift_up_desc">水壶提起后放回，继续保温(45℃以上)</string>
     <string name="text_kettle_lift_up_upgrade_tips">请点击右上角图标，升级固件版本体验提壶记忆功能</string>
-    <string name="text_kettle_lift_up_tips">空壶或水量过少时，请关闭保温功能，防止无水状态工作，影响水壶寿命。（此功能仅适用于4-35℃室温环境下）</string>
-    <string name="button_cancel">取消</string>
-    <string name="button_confirm">确定</string>
 
     <string name="um_keep_warm_boil_string1">煮沸后在</string>
     <string name="um_keep_warm_boil_string2">℃保温</string>
@@ -78,7 +114,6 @@
     <string name="um_keep_warm_not_boil_string2">℃保温</string>
     <string name="text_key_keep_warn">保温</string>
     <string name="toast_idle_temp_set">请按水壶保温键开始工作</string>
-    <string name="toast_keep_warm_temp_set">工作中！是否确认更改保温温度？</string>
     <string name="um_status_keep_warm1">已保温</string>
     <string name="um_status_keep_warm_h">小时</string>
     <string name="um_status_keep_warm_m">分钟</string>
@@ -124,10 +159,25 @@
     <string name="update_begin">开始升级</string>
     <string name="bluetooth_error">未开启蓝牙</string>
     <string name="um_string_errord100">1.水壶可能没有连接电源。\n2.手机可能没有开启蓝牙。\n3.手机与水壶的距离太远。\n\n解决办法：开启蓝牙，水壶连接电源，尽量使手机与水壶靠近，返回到“我的设备”列表，重新尝试。</string>
+
     <string name="um_license_title">用户使用协议</string>
     <string name="um_license_have_read">我已阅读</string>
     <string name="um_license_agree">同意并继续</string>
-
     <string name="um_license_name">米家恒温水壶用户协议</string>
     <string name="um_conceal_name">米家恒温水壶隐私政策</string>
+
+    <string name="um_policy">PRIVACY_POLICY_ch.html</string>
+    <string name="um_licease">Software_License_ch.html</string>
+    <string name="um_policy_title">隐私政策</string>
+    <string name="um_licease_title">软件许可及服务协议</string>
+
+    <!--=================================================================================================-->
+
+    <string name="um_no_problem">There are {0} problems to be solved</string>
+
+    <string name="um_tag_coffee">Coffee</string>
+    <string name="um_tag_milk">Baby rice flour</string>
+    <string name="um_tag_tea">White tea</string>
+
+
 </resources>

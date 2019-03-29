@@ -20,16 +20,6 @@
             android:translationX="@dimen/dp_150"
             android:translationY="@dimen/dp_50" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_anim1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:src="@drawable/icon_bule_bg"-->
-        <!--android:translationX="80dp"-->
-        <!--android:translationY="210dp" />-->
-
         <ImageView
             android:id="@+id/iv_anim2"
             android:layout_width="match_parent"
@@ -39,16 +29,6 @@
             android:src="@drawable/icon_bule_bg"
             android:translationX="@dimen/dp_50"
             android:translationY="@dimen/dp_160" />
-
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_anim2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:src="@drawable/icon_bule_bg"-->
-        <!--android:translationX="-80dp"-->
-        <!--android:translationY="210dp" />-->
 
         <ImageView
             android:id="@+id/iv_anim3"
@@ -60,16 +40,6 @@
             android:translationX="@dimen/dp_270"
             android:translationY="@dimen/dp_50" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_anim3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:src="@drawable/icon_bule_bg"-->
-        <!--android:translationX="120dp"-->
-        <!--android:translationY="240dp" />-->
-
         <ImageView
             android:id="@+id/iv_anim4"
             android:layout_width="match_parent"
@@ -79,16 +49,6 @@
             android:src="@drawable/icon_bule_bg"
             android:translationX="@dimen/dp_50"
             android:translationY="@dimen/dp_240" />
-
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_anim4"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:src="@drawable/icon_bule_bg"-->
-        <!--android:translationX="-120dp"-->
-        <!--android:translationY="240dp" />-->
 
         <ImageView
             android:id="@+id/iv_anim5"
@@ -100,14 +60,5 @@
             android:translationX="@dimen/dp_80"
             android:translationY="@dimen/dp_80" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/iv_anim5"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:scaleType="centerInside"-->
-        <!--android:src="@drawable/icon_bule_bg"-->
-        <!--android:translationX="0dp"-->
-        <!--android:translationY="180dp" />-->
     </RelativeLayout>
 </RelativeLayout>

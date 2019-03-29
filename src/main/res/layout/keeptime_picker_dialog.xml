@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/timer_view"
+    android:layout_width="350dp"
+    android:layout_height="500dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_margin="@dimen/dp_20"
+        android:text="选择保温时长"
+        android:textColor="@color/age_text"/>
+
+    <TextView
+        android:id="@+id/selectedTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="--"
+        android:layout_margin="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/select"
+        android:textColor="@color/age_text"/>
+
+    <SeekBar
+        android:id="@+id/timer_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:max="120"
+        style="@style/DeviceSeekbarStyle"
+        android:layout_below="@id/selectedTimer"/>
+
+    <RelativeLayout
+        android:id="@+id/timer_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/timer_picker">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.5h"
+            android:textSize="14sp"
+            android:textColor="@color/age_text"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="12h"
+            android:textSize="14sp"
+            android:textColor="@color/age_text"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer_label">
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消"
+            android:textColor="@color/class_text_23"
+            android:background="@color/white_50_transparent"/>
+
+        <Button
+            android:id="@+id/certain_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="确定"
+            android:textColor="@android:color/holo_blue_dark"
+            android:background="@color/white_50_transparent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

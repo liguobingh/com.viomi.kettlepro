@@ -27,6 +27,7 @@ public class MyTextView extends TextView {
     private void init() {
         startColor = getResources().getColor(R.color.bg_gray);
         endColor = getResources().getColor(R.color.bg_gray);
+        this.setTypeface(TypefaceCache.getFaceText(getContext(), 1));
     }
 
     @Override
@@ -35,9 +36,7 @@ public class MyTextView extends TextView {
         mPaint = getPaint();
         String mTipText = getText().toString();
         mPaint.getTextBounds(mTipText, 0, mTipText.length(), mTextBound);
-        mLinearGradient = new LinearGradient(0, 0, mViewWidth, 0,
-                new int[]{startColor, endColor},
-                null, Shader.TileMode.REPEAT);
+        mLinearGradient = new LinearGradient(0, 0, mViewWidth, 0, new int[]{startColor, startColor}, null, Shader.TileMode.REPEAT);
         mPaint.setShader(mLinearGradient);
         canvas.drawText(mTipText, getMeasuredWidth() / 2 - mTextBound.width() / 2, getMeasuredHeight() / 2 + mTextBound.height() / 2, mPaint);
     }

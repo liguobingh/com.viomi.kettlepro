@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@null"
-                android:text="加热至保温温度"
+                android:text="@string/um_device_hot"
                 android:textColor="@color/black" />
 
             <View
@@ -48,8 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@null"
-                android:text="煮沸降至保温温度"
+                android:text="@string/um_device_boil"
                 android:textColor="@color/black" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -60,29 +61,35 @@
         <RelativeLayout
             android:id="@+id/rl_boil"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:background="@color/white"
             android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tag0"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="防止重复煮沸"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_toLeftOf="@id/iv_switch1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tag0"
-                android:layout_marginTop="2dp"
-                android:text="降温未超过5度，按保温键仅加热至保温温度"
-                android:textColor="@color/class_D"
-                android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tag0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/title_avoid_boil_repeat"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tag0"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/um_boil_model_set_desc"
+                    android:textColor="@color/class_D"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
             <com.viomi.kettlepro.view.UMSwitchButton
                 android:id="@+id/iv_switch1"
@@ -104,28 +111,34 @@
         <RelativeLayout
             android:id="@+id/rl_keep_warm"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:background="@color/white">
 
-            <TextView
-                android:id="@+id/tag"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="提壶记忆保温"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:layout_toLeftOf="@id/iv_switch2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tag"
-                android:layout_marginTop="2dp"
-                android:text="水壶提起放回，继续保温（45度以上）"
-                android:textColor="@color/class_D"
-                android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/title_kettle_lift_up"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tag"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/text_kettle_lift_up_desc"
+                    android:textColor="@color/class_D"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
             <com.viomi.kettlepro.view.UMSwitchButton
                 android:id="@+id/iv_switch2"

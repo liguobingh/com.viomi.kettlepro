@@ -1,8 +1,12 @@
 <resources>
     <dimen name="dp_m_120">-120dp</dimen>
     <dimen name="dp_m_80">-80dp</dimen>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_50">50dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
     <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_110">110dp</dimen>
     <dimen name="dp_120">120dp</dimen>
     <dimen name="dp_150">150dp</dimen>
@@ -12,4 +16,13 @@
     <dimen name="dp_240">240dp</dimen>
     <dimen name="dp_270">270dp</dimen>
     <dimen name="dp_300">300dp</dimen>
+
+    <!--提示框-->
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_26">26dp</dimen>
+    <dimen name="dp_42">42dp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+
 </resources>

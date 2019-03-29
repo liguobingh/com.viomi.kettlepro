@@ -17,13 +17,14 @@ public class UMGlobalParam {
 	public static final String MODEL_KETTLE_V3="yunmi.kettle.v3";//台湾版
 	public static final String MODEL_KETTLE_V5="yunmi.kettle.v5";//韩国版
 	public static final String MODEL_KETTLE_V6="yunmi.kettle.v6";//
+	public static final String MODEL_KETTLE_V7="yunmi.kettle.v7";//国际版
 
 	public static boolean isSaveStatusData=false;//是否保存状态数据
 	public static float density=1;
 
 	public static final int STATUS_IDLE=0;//空闲中
 	public static final int STATUS_HEATING=1;//加热中
-	public static final int STATUS_KEEP_WARM_BOIL=2;//煮沸保温中	
+	public static final int STATUS_KEEP_WARM_BOIL=2;//煮沸保温中
 	public static final int STATUS_KEEP_WARM_NOT__BOIL=3;//未煮沸保温中
 	public static final int STATUS_ABNORMAL=4;//异常
 	
@@ -130,8 +131,7 @@ public class UMGlobalParam {
     	DisplayMetrics metrics=mContext.getResources().getDisplayMetrics();
     	density=metrics.density;
     }
-    
-    
+
     /***
      * 是否第一次进入状态页面
      * @return 结果

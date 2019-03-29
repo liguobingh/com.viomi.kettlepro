@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         //需要配置为插件包名
@@ -10,17 +10,12 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
         //每次发布版本versionCode必须加1
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
     }
 
     signingConfigs {
         release {
-            //需要重新配置插件的签名文件
-//            storeFile new File("${project.projectDir}/keystore/key.keystore")
-//            storePassword 'mihome'
-//            keyAlias 'mihome-demo-key'
-//            keyPassword 'mihome'
             //需要重新配置插件的签名文件
             storeFile new File("${project.projectDir}/keystore/key.keystore")
             storePassword '123456'
