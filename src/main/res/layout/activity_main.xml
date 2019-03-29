@@ -37,11 +37,10 @@
 
         <com.viomi.kettlepro.view.MyTextView
             android:id="@+id/tv_temp"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_150"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/tag1"
             android:layout_below="@id/tag1"
-            android:gravity="center"
             android:text="@string/um_cur_temp_default"
             android:textSize="60sp" />
 

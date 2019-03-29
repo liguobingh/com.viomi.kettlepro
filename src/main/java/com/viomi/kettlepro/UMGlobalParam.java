@@ -96,7 +96,7 @@ public class UMGlobalParam {
 	public final static byte MSG_MEMORY_STATUS_READ= 21;//提壶记忆保温功能
 
 
-	public final static int MIN_KEEP_WARM_TIME=1;//最小保温时长
+	public final static float MIN_KEEP_WARM_TIME=0.5f;//最小保温时长
  	public final static int MAX_KEEP_WARM_TIME=12;//最大保温时长
 
 	public final static int BOIL_TEMP=98;//沸腾温度

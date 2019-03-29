@@ -6,6 +6,7 @@
     <string name="um_cur_temp_default">--</string>
     <string name="um_custom_mode">自定义</string>
     <string name="um_temp_duration">保温时长</string>
+    <string name="choose_temp_duration">选择保温时长</string>
     <string name="um_temp_value">保温温度</string>
 
     <string name="text_protiotics">益生菌冲剂</string>
@@ -163,8 +164,8 @@
     <string name="um_license_title">用户使用协议</string>
     <string name="um_license_have_read">我已阅读</string>
     <string name="um_license_agree">同意并继续</string>
-    <string name="um_license_name">米家恒温水壶用户协议</string>
-    <string name="um_conceal_name">米家恒温水壶隐私政策</string>
+    <string name="um_license_name">云米恒温水壶用户协议</string>
+    <string name="um_conceal_name">云米恒温水壶隐私政策</string>
 
     <string name="um_policy">PRIVACY_POLICY_ch.html</string>
     <string name="um_licease">Software_License_ch.html</string>

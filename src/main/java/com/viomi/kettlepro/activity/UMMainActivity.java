@@ -100,7 +100,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     private TextView tvTitle, tvCoffee, tvRice, tvTea, tvMilk;
     private ImageView backBn, barMore, bluOff;
     private View v_top, v_bottom;
-//    private VerticalTimeRulerView setTime;// “保温时长”设置竖条
+    //    private VerticalTimeRulerView setTime;// “保温时长”设置竖条
     private VerticalRulerView setTemp;// “保温温度”设置竖条
     //    private MLAlertDialog mlAlertDialog;
     private AlertDialog mlAlertDialog;
@@ -178,17 +178,14 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         tvTitle.setText(mDeviceStat.name);// 用户可能自主命名设备，实时更新设备名称。
 //        log.d("@@@@@", "model:" + mDeviceStat.model);
 
-        // 显示隐私授权条例
-        if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V2) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V3)
-                || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V6) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V7)) {
-            String uid = mSharedPreferences.getString("uid", "");
-            long time = mSharedPreferences.getLong("time", 0);
-            if (uid.equals("") && time == 0) {
-                boolean flag = XmPluginHostApi.instance().getApiLevel() >= VERSION_LICENSE_ADD;
-//                Log.d(TAG, "yinsi=" + flag);
-                if (flag) {
-                    lisenseInit();
-                } else {
+        boolean flag = XmPluginHostApi.instance().getApiLevel() >= VERSION_LICENSE_ADD;
+        if (flag) {
+            // 显示隐私授权条例
+            if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V2) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V3)
+                    || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V6) || mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V7)) {
+                String uid = mSharedPreferences.getString("uid", "");
+                long time = mSharedPreferences.getLong("time", 0);
+                if (uid.equals("") && time == 0) {
                     if (mDeviceStat.model.equals(UMGlobalParam.MODEL_KETTLE_V5)) {
                         mHostActivity.showUserLicenseDialog(activity().getResources().getString(R.string.um_license_title),
                                 getResources().getString(R.string.um_license_name),
@@ -219,6 +216,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 }
             }
         }
+
         initAnimator();
         UMBluetoothManager.getInstance().readMcuVersion();
         UMBluetoothManager.getInstance().openEachRecordNotify();
@@ -231,7 +229,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             switch (msg.what) {
                 case MSG_REFRESH_ICONS:
 //                    String str = (String) msg.obj;
-//                    log.d("@@@@@", "str:" + str);
                     setImagesBackground();
                     break;
             }
@@ -313,9 +310,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         setTemp.setVisibility(View.GONE);
 
         bluStatus = XmBluetoothManager.getInstance().isBluetoothOpen();
-//        log.d("@@@@@", "bluStatus:" + bluStatus);
+        log.d("@@@@@", "bluStatus:" + bluStatus);
         connState = XmBluetoothManager.getInstance().getConnectStatus(mDeviceStat.mac);
-//        log.d("@@@@@", "connState:" + connState);
+        log.d("@@@@@", "connState:" + connState);
 
         if (bluStatus == false) {
             tvStatus.setText(getString(R.string.um_status_close));
@@ -341,7 +338,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             @Override
             public void onStatusDataReceive(byte[] data) {
                 if (bluStatus == true && connState == STATE_CONNECTED) {
-//                    log.d("@@@@@", "更新界面运行了吗？");
                     tag1.setText(getString(R.string.um_cur_temp));
                     tvTemp.setVisibility(View.VISIBLE);
                     bluOff.setVisibility(View.GONE);
@@ -387,6 +383,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         setTemp.setRuleScrollEndListener(new VerticalRulerView.RulerScrollEndCallback() {
             @Override
             public void onRulerScrollEnd(int length, int value) {
+                Log.i("LLL", "value:" + value);
                 setKeepWarmTemp(value);
             }
         });
@@ -503,31 +500,30 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 } else if (mKeyChoose == 1 || mKeyChoose == 2) {
                     if (ll_mode.getVisibility() == View.GONE && setTemp.getVisibility() == View.GONE) {
 //                        if (mlAlertDialog == null) {
-                            LayoutInflater layoutInflater = LayoutInflater.from(activity());
-                            view = layoutInflater.inflate(R.layout.um_dialog_settemp_tip, null);
+                        LayoutInflater layoutInflater = LayoutInflater.from(activity());
+                        view = layoutInflater.inflate(R.layout.um_dialog_settemp_tip, null);
 
-                            TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
-                            TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
-                            mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
+                        TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
+                        TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
+                        mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
 //                            Window dialogWindow = mlAlertDialog.getWindow();
 //                            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
 //                            lp.width = PhoneUtil.dipToPx(activity(), 400);
 //                            dialogWindow.setAttributes(lp);
 
-                            buttonCancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    mlAlertDialog.dismiss();
-                                }
-                            });
-                            buttonOk.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    mlAlertDialog.dismiss();
-                                    showWindow(ll_mode);
-//                                    log.d("@@@@@", "模式选择框");
-                                }
-                            });
+                        buttonCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mlAlertDialog.dismiss();
+                            }
+                        });
+                        buttonOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mlAlertDialog.dismiss();
+                                showWindow(ll_mode);
+                            }
+                        });
 //                        }
                         mlAlertDialog.show();
                     }
@@ -536,7 +532,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             case R.id.rl_duration:
 //                setTime.resetMeasure();
 //                showWindow(setTime);
-                showTimerDialog((int)selectTimerValue * 10);
+                showTimerDialog((int) selectTimerValue * 10);
                 break;
             case R.id.rl_temp:
                 if (mKeyChoose == 255) {
@@ -545,27 +541,26 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 } else if (mKeyChoose == 1 || mKeyChoose == 2) {
                     if (ll_mode.getVisibility() == View.GONE && setTemp.getVisibility() == View.GONE) {
 //                        if (mlAlertDialog == null) {
-                            LayoutInflater layoutInflater = LayoutInflater.from(activity());
-                            view = layoutInflater.inflate(R.layout.um_dialog_settemp_tip, null);
+                        LayoutInflater layoutInflater = LayoutInflater.from(activity());
+                        view = layoutInflater.inflate(R.layout.um_dialog_settemp_tip, null);
 
-                            TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
-                            TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
-                            mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
-                            buttonCancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    mlAlertDialog.dismiss();
-                                }
-                            });
-                            buttonOk.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    mlAlertDialog.dismiss();
+                        TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
+                        TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
+                        mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
+                        buttonCancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mlAlertDialog.dismiss();
+                            }
+                        });
+                        buttonOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mlAlertDialog.dismiss();
 //                                    setTemp.resetMeasure();
-                                    showWindow(setTemp);
-//                                    log.d("@@@@@", "温度设置框");
-                                }
-                            });
+                                showWindow(setTemp);
+                            }
+                        });
 //                        }
                         mlAlertDialog.show();
                     }
@@ -927,6 +922,12 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     private void refreshView(byte[] data) {
 //        log.d("@@@@@", "========data:" + data);
         if (data == null) {
+            tvStatus.setText(getString(R.string.um_status_close));
+            tag1.setText(getString(R.string.un_status_disconnected));
+            tvTemp.setVisibility(View.GONE);
+            bluOff.setVisibility(View.VISIBLE);
+            bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
+            tvMode.setText(getString(R.string.um_cur_temp_default));
             log.d("@@@@@", "MSG_WHAT_STATUS_VARY,data null!");
             return;
         } else if (data.length < 7) {
@@ -936,11 +937,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 
         // 状态模式
         status = data[0];
-//        log.d("@@@@@", "status = " + status);
 
         // 按键选择
         mKeyChoose = data[1] & 0xff;
-//        log.d("@@@@@", "mKeyChoose = " + mKeyChoose);
 
         // 是否完成
         boolean isCompleted = false;
@@ -959,11 +958,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         // 自定义温度
         int mTemp = data[4] & 0xff;
         mTempCustom = mTemp;
-//        log.d("@@@@@", "mTempCustom = " + mTempCustom);
 
         // 实际温度显示
         int currentTemp = data[5] & 0xff;
-//        log.d("@@@@@", "currentTemp = " + currentTemp);
         if (currentTemp < 0) {
             currentTemp = 0;
         } else if (currentTemp > 100) {
@@ -973,14 +970,13 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         mCurrentTemp = currentTemp;
 
         // 自定义模式
-/*        mHeatModel = data[6];
-        boolean isBiol;
-        if (mHeatModel == UMGlobalParam.MODEL_KEEP_WARM_BOIL) {
-            isBiol = true;
-        } else {
-            isBiol = false;
-        }*/
-
+/*            mHeatModel = data[6];
+            boolean isBiol;
+            if (mHeatModel == UMGlobalParam.MODEL_KEEP_WARM_BOIL) {
+                isBiol = true;
+            } else {
+                isBiol = false;
+            }*/
         // 保温消耗时间、煮沸模式特殊模式、保温时间
         float mSetTime = UMGlobalParam.MAX_KEEP_WARM_TIME;// 最大的保温时间
         boolean boilModeSelect = true;
@@ -991,12 +987,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 //            log.d(TAG, "mConsumeTime=" + mConsumeTime);
             if (data[9] == 0) {
                 boilModeSelect = false;
-//                log.d("@@@@@", "boilModeSelect11111 = " + boilModeSelect);
             } else if (data[9] == 1) {
                 boilModeSelect = true;
-//                log.d("@@@@@", "boilModeSelect22222 = " + boilModeSelect);
             }
-//            log.d("@@@@@", "boilModeSelect = " + boilModeSelect);
             mSetTime = (float) ((int) (data[10] & 0xff) * 0.5);
             if (mSetTime > UMGlobalParam.MAX_KEEP_WARM_TIME) {
                 mSetTime = UMGlobalParam.MAX_KEEP_WARM_TIME;
@@ -1015,14 +1008,11 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             }
         }
         String string = getStatusString(mIsOnline, status, isCompleted, currentTemp, mTempCustom, mConsumeTime);
-//        log.d("@@@@@", "stringhuoqu:" + string);
         if (!TextUtils.isEmpty(string)) {
-//            log.d("@@@@@", "string:" + string);
             mHandler.sendMessage(mHandler.obtainMessage(MSG_REFRESH_ICONS, string));
 //            setImagesBackground(string);
         } else {
             String statusStr = getString(R.string.um_status_net_abnormal);
-//            log.d("@@@@@", "statusStr:" + statusStr);
             mHandler.sendMessage(mHandler.obtainMessage(MSG_REFRESH_ICONS, statusStr));
 //            setImagesBackground(string);
         }
@@ -1110,23 +1100,18 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 //        if (isOnline) {
             if (status == UMGlobalParam.STATUS_IDLE) {// “空闲中”状态
                 statusStr = getString(R.string.um_status_close);
-//                log.d("@@@@@", "getStatusString1111----statusStr=" + statusStr);
             } else if (status == UMGlobalParam.STATUS_HEATING) {// “加热中”状态
                 statusStr = getString(R.string.um_status_heating);
-//                log.d("@@@@@", "getStatusString2222----statusStr=" + statusStr);
             } else if (status == UMGlobalParam.STATUS_KEEP_WARM_NOT__BOIL) {// “保温中”状态（未煮沸）
                 statusStr = getString(R.string.um_status_keep_warm);
-//                log.d("@@@@@", "getStatusString3333----statusStr=" + statusStr);
             } else if (status == UMGlobalParam.STATUS_KEEP_WARM_BOIL) {// “保温中”状态（煮沸）
                 statusStr = getString(R.string.um_status_keep_warm);
-//                log.d("@@@@@", "getStatusString4444----statusStr=" + statusStr);
             } else {
                 statusStr = getString(R.string.um_status_abnormal);
             }
         } else if (bluStatus != true || connState != STATE_CONNECTED) {
             statusStr = getString(R.string.un_status_disconnected);
         }
-//        log.d("@@@@@", "getStatusString5555----statusStr=" + statusStr);
         return statusStr;
     }
 
@@ -1182,7 +1167,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                         activity().finish();
                     }
 //                    isOnActivity = 0;
-//                    Log.d("@@@@@", "isOnActivity = " + isOnActivity);
 //                    UMBluetoothManager.getInstance().isOnMainActivity(isOnActivity);
                 }
                 break;
@@ -1246,7 +1230,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         }
         hostActivity().openMoreMenu(items, true, REQUEST_MENUS_SECOND, commonSettingIntent);
         isOnActivity = 0;
-        Log.d("@@@@@", "isOnActivity = " + isOnActivity);
         UMBluetoothManager.getInstance().isOnMainActivity(isOnActivity);
     }
 
@@ -1364,7 +1347,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         mShowAnimation.setDuration(duration);
 //        mShowAnimation.setFillAfter(true);
         view.setVisibility(View.VISIBLE);
-//        log.d("@@@@@", "==========TranslationX:" + view.getTranslationX() + "\n" + "X:" + view.getX());
         if (view.getTranslationX() != 0) {
             view.setTranslationX(0);
         }
@@ -1459,7 +1441,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
             timerDialog = new MLAlertDialog.Builder(activity()).setView(view).show();
             Button cancelButton = (Button) view.findViewById(R.id.cancel_btn);
             Button certainButton = (Button) view.findViewById(R.id.certain_btn);
-            selectedTimer = (TextView)view.findViewById(R.id.selectedTimer);
+            selectedTimer = (TextView) view.findViewById(R.id.selectedTimer);
             timerPickerView = (SeekBar) view.findViewById(R.id.timer_picker);
             timerPickerView.setProgress(progress);
             setSelectedTimerTextView(progress);
@@ -1518,7 +1500,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         } else {
             int del = progress % (tenPlace * 10);
             int digitPlace = del < 5 ? 0 : 5;
-            selectTimerValue = (float)(tenPlace * 10 + digitPlace) / 10;
+            selectTimerValue = (float) (tenPlace * 10 + digitPlace) / 10;
             selectedTimer.setText(tenPlace + "." + digitPlace);
         }
     }

@@ -91,7 +91,7 @@ public class UMBluetoothManager {
 
     public static UMBluetoothManager INSTANCE;
 
-    private int isOnActivity = 1;// 判斷是否在主界面
+    private int isOnActivity = 1;// 判断是否在主界面
 
     public static UMBluetoothManager getInstance() {
         if (INSTANCE == null) {

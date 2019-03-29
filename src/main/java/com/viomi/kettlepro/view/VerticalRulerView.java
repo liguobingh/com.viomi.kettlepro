@@ -39,8 +39,8 @@ public class VerticalRulerView extends View{
     private int mMaximumVelocity;
     private int maxScrollX = 1000; // 最大允许滑出范围
     private int currentOffset; // 当前偏移
-    private VelocityTracker mVelocityTracker;
-    private boolean isFastScroll;
+//    private VelocityTracker mVelocityTracker;
+//    private boolean isFastScroll;
     private AllRulerCallback mListener;
     private RulerScrollEndCallback scrollEndCallback;
     private int number;
@@ -118,7 +118,7 @@ public class VerticalRulerView extends View{
                 lineHeight = 70;
                 int y = (i - startValue ) * space;
                 if (y > 0 || y < height) {
-                    canvas.drawText(String.valueOf(i ) + "℃",70, y + textOffset, txtPaint);
+                    canvas.drawText(String.valueOf(i ) + "℃",10, y + textOffset, txtPaint);
                 }
             }else if (i % 5 == 0){
                 lineHeight = 50;
@@ -145,7 +145,7 @@ public class VerticalRulerView extends View{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        obtainVelocityTracker();
+//        obtainVelocityTracker();
         int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
@@ -155,21 +155,23 @@ public class VerticalRulerView extends View{
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                isFastScroll = false;
+//                isFastScroll = false;
                 float moveY = event.getY();
                 currentOffset = (int) (moveY - mLastY);
                 scrollTo(0, getScrollY() - currentOffset);
-                computeAndCallback(getScrollY());
+//                computeAndCallback(getScrollY());
                 mLastY = moveY;
+                Log.d("@@@@@", "onTouchEvent: " + mLastY);
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
-                mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
-                int initialVelocity = (int) mVelocityTracker.getYVelocity();
-                if ((Math.abs(initialVelocity) > mMinimumVelocity)) {
-                    isFastScroll = true;
-                    flingY(-initialVelocity);
-                } else {
+                Log.d("@@@@@", "onTouchEvent: " + 1111111);
+//                mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
+//                int initialVelocity = (int) mVelocityTracker.getYVelocity();
+//                if ((Math.abs(initialVelocity) > mMinimumVelocity)) {
+//                    isFastScroll = true;
+//                    flingY(-initialVelocity);
+//                } else {
                     int y = getScrollY();
                     if (y % space != 0) {
                         y -= y % space;
@@ -181,13 +183,13 @@ public class VerticalRulerView extends View{
                     }
                     scrollTo(0, y);
                     computeAndCallback(y);
-                }
-                releaseVelocityTracker();
+//                }
+//                releaseVelocityTracker();
                 break;
         }
-        if (mVelocityTracker != null) {
-            mVelocityTracker.addMovement(event);
-        }
+//        if (mVelocityTracker != null) {
+//            mVelocityTracker.addMovement(event);
+//        }
         return true;
     }
 
@@ -199,50 +201,50 @@ public class VerticalRulerView extends View{
             computeAndCallback(x);
             postInvalidate();
         } else {
-            if (isFastScroll) {
-                int x = mScroller.getCurrY() + BASELINE_OFFSET % space;
-                if (x % space != 0) {
-                    x -= x % space;
-                }
-                scrollTo(0,x);
-                computeAndCallback(x);
-                postInvalidate();
-            }
+//            if (isFastScroll) {
+//                int x = mScroller.getCurrY() + BASELINE_OFFSET % space;
+//                if (x % space != 0) {
+//                    x -= x % space;
+//                }
+//                scrollTo(0,x);
+//                computeAndCallback(x);
+//                postInvalidate();
+//            }
         }
     }
 
 
 
-    /**
-     * 释放 速度追踪器
-     */
-    private void releaseVelocityTracker() {
-        if (mVelocityTracker != null) {
-            mVelocityTracker.recycle();
-            mVelocityTracker = null;
-        }
-    }
-
-
-    /**
-     * 初始化 速度追踪器
-     */
-    private void obtainVelocityTracker() {
-        if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain();
-        }
-    }
+//    /**
+//     * 释放 速度追踪器
+//     */
+//    private void releaseVelocityTracker() {
+//        if (mVelocityTracker != null) {
+//            mVelocityTracker.recycle();
+//            mVelocityTracker = null;
+//        }
+//    }
+//
+//
+//    /**
+//     * 初始化 速度追踪器
+//     */
+//    private void obtainVelocityTracker() {
+//        if (mVelocityTracker == null) {
+//            mVelocityTracker = VelocityTracker.obtain();
+//        }
+//    }
 
     /**
      * 惯性滑动
      *
      *
      */
-    public void flingY(int velocityY) {
-        mScroller.fling(getScrollX(), getScrollY(), 0, velocityY, 0, 0, -BASELINE_OFFSET, (endValue - startValue) * space  - BASELINE_OFFSET);
-        awakenScrollBars(mScroller.getDuration());
-        invalidate();
-    }
+//    public void flingY(int velocityY) {
+//        mScroller.fling(getScrollX(), getScrollY(), 0, velocityY, 0, 0, -BASELINE_OFFSET, (endValue - startValue) * space  - BASELINE_OFFSET);
+//        awakenScrollBars(mScroller.getDuration());
+//        invalidate();
+//    }
 
 
     /**
@@ -251,16 +253,22 @@ public class VerticalRulerView extends View{
      *
      */
     private void computeAndCallback(int scrollX) {
-        if (scrollEndY == scrollX) {
-            scrollEndCounter++;
-            if (scrollEndCounter >= 5) {
-                scrollEndCallback(scrollX);
-                scrollEndCounter = 0;
-                isFastScroll = false;
-            }
-        }
+//        if (scrollEndY == scrollX) {
+//            if (!isFastScroll) {
+//                scrollEndCallback(scrollX);
+//            } else {
+//                scrollEndCounter++;
+//                if (scrollEndCounter >= 3) {
+//                    scrollEndCallback(scrollX);
+//                    scrollEndCounter = 0;
+//                    isFastScroll = false;
+//                }
+//            }
+//        }
+//
+//        scrollEndY = scrollX;
 
-        scrollEndY = scrollX;
+        scrollEndCallback(scrollX);
 
         if (mListener != null) {
             int finalX = BASELINE_OFFSET + scrollX;

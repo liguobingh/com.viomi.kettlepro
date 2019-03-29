@@ -6,6 +6,7 @@
     <string name="um_cur_temp_default">--</string>
     <string name="um_custom_mode">Custom</string>
     <string name="um_temp_duration">Keep warm time</string>
+    <string name="choose_temp_duration">Choose keep warm time</string>
     <string name="um_temp_value">Water temperature</string>
 
     <string name="text_protiotics">Probiotics</string>
@@ -153,8 +154,8 @@
     <string name="um_license_title">User Agreement</string>
     <string name="um_license_have_read">I\'ve read\u0020</string>
     <string name="um_license_agree">Agree and continue</string>
-    <string name="um_license_name">Mi Smart Kettle User Agreement</string>
-    <string name="um_conceal_name">Mi Smart Kettle (Under Counter) Privacy Policy</string>
+    <string name="um_license_name">Viomi smart kettle  User Agreement</string>
+    <string name="um_conceal_name">Viomi smart kettle  (Under Counter) Privacy Policy</string>
     <string name="um_policy">RIVACY_POLICY_en.html</string>
     <string name="um_licease">Software_License_en.html</string>
     <string name="um_policy_title">PRIVACY POLICY</string>
