@@ -45,7 +45,7 @@
         <com.viomi.kettlepro.view.MiTextView
             android:id="@+id/button_cancel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/devide"
             android:gravity="center"
@@ -56,7 +56,7 @@
         <com.viomi.kettlepro.view.MiTextView
             android:id="@+id/button_confirm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/devide"
             android:gravity="center"

@@ -28,7 +28,7 @@ public class UMSwitchButton extends CheckBox {
 
     protected static final int FULL_ALPHA = 255;
 
-    protected static final int ANIMATION_DURATION = 180;
+    protected static final int ANIMATION_DURATION = 200;
 
     protected static final int SCALE_ANIMATION_DELAY = 100;
 
