@@ -265,6 +265,7 @@ public class UMBluetoothManager {
 
     /**
      * 处理网络状态变化
+     *
      * @param status
      */
     private void processConnectStatusChanged(int status) {
@@ -280,7 +281,7 @@ public class UMBluetoothManager {
             if (isOnActivity == 1) {
                 connect();
                 Log.d("@@@@@", "connect运行了吗？");
-            } else if (isOnActivity == 0){
+            } else if (isOnActivity == 0) {
             }
         } else {
             if (mStatusListener != null) {
@@ -291,6 +292,7 @@ public class UMBluetoothManager {
 
     /**
      * 传递 撤销协议 主界面是否退出 标志位
+     *
      * @param isOn
      */
     public void isOnMainActivity(int isOn) {
@@ -336,8 +338,11 @@ public class UMBluetoothManager {
     public void init(Context context, DeviceStat mDeviceStat, UMStatusInterface mStatusInterface) {
         this.context = context;
         this.model = mDeviceStat.model;
+        log.d(TAG, "model=" + this.model);
         this.mac = mDeviceStat.mac;
+        log.d(TAG, "mac=" + this.mac);
         this.did = mDeviceStat.did;
+        log.d(TAG, "did=" + this.did);
         this.mStatusListener = mStatusInterface;
         registerBleNotifyReceiver();
 //        connect();
@@ -345,7 +350,6 @@ public class UMBluetoothManager {
         if (UMGlobalParam.isSaveStatusData) {
             initFile();
         }
-        log.d(TAG, "model=" + this.model);
     }
 
     public void setStatusListener(UMStatusInterface statusListener) {
@@ -397,7 +401,7 @@ public class UMBluetoothManager {
                     if (code == Code.REQUEST_SUCCESS) {
                         log.d(TAG, "BleNotifyResponse,success!");
                     } else {
-                        log.d(TAG, "BleNotifyResponse fail,onResponse:code=" + code + ",data=" + data);
+                        log.d(TAG, "BleNotifyResponse fail,onResponse:code = " + code + ",data = " + data);
                     }
                 }
             };
@@ -766,19 +770,15 @@ public class UMBluetoothManager {
      * 读取固件版本
      */
     public void readMcuVersion() {
-        log.d(TAG, "readMcuVersion atart" );
         XmBluetoothManager.getInstance().read(mac, UMGattAttributes.INFO_SERVICE_UUID, UMGattAttributes.MCU_VERSION_UUID, new BleReadResponse() {
             @Override
             public void onResponse(int code, byte[] data) {
-                log.d(TAG, "readMcuVersion success! version:");
                 try {
-                    if (code == Code.REQUEST_SUCCESS) {
-                        if (data != null && data.length > 0) {
-                            String version = new String(data);
-                            mUpgraderMsg.currentMcuVersion = version;
-                            log.d(TAG, "readMcuVersion success! version:" + version);
-                            upgradeCompare(version, mUpgraderMsg.latestMcuVersion);
-                        }
+                    if (code == Code.REQUEST_SUCCESS && data != null && data.length > 0) {
+                        String version = new String(data);
+                        mUpgraderMsg.currentMcuVersion = version;
+                        log.d(TAG, "readMcuVersion-mUpgraderMsg.currentMcuVersion:" + version);
+                        upgradeCompare(version, mUpgraderMsg.latestMcuVersion);
                         return;
                     }
                 } catch (Exception e) {
@@ -1037,25 +1037,24 @@ public class UMBluetoothManager {
      * 读取固件升级信息
      */
     public void runUpdateInfo() {
-        Log.i(TAG, "runUpdateInfo,!model=" + model);
+        Log.i(TAG, "读取固件升级信息");
         XmPluginHostApi.instance().getBluetoothFirmwareUpdateInfo(model, new Callback<BtFirmwareUpdateInfo>() {
 
             @Override
-            public void onSuccess(BtFirmwareUpdateInfo result) {
-                if (result == null) {
+            public void onSuccess(BtFirmwareUpdateInfo btFirmwareUpdateInfo) {
+                if (btFirmwareUpdateInfo == null) {
                     Log.e(TAG, "getBluetoothFirmwareUpdateInfo onSuccess return null");
                     return;
                 }
-                Log.i(TAG, "version" + result.version + ",changeLog=" + result.changeLog);
-                mUpgraderMsg.latestMcuVersion = result.version;
-                mUpgraderMsg.upgradeDescription = result.changeLog;
-                mUpgraderMsg.url = result.url;
-                upgradeCompare(mUpgraderMsg.currentMcuVersion, result.version);
-
+                Log.i(TAG, "version" + btFirmwareUpdateInfo.version + ",changeLog=" + btFirmwareUpdateInfo.changeLog);
+                mUpgraderMsg.latestMcuVersion = btFirmwareUpdateInfo.version;
+                mUpgraderMsg.upgradeDescription = btFirmwareUpdateInfo.changeLog;
+                mUpgraderMsg.url = btFirmwareUpdateInfo.url;
+                upgradeCompare(mUpgraderMsg.currentMcuVersion, btFirmwareUpdateInfo.version);
             }
 
             @Override
-            public void onFailure(int error, String errorInfo) {
+            public void onFailure(int error, String msg) {
                 if (mHandler != null) {
                     mHandler.sendEmptyMessageDelayed(UMGlobalParam.MSG_REFRESH_UPDATE_INFO_ERR, 100);
                 }
@@ -1082,7 +1081,6 @@ public class UMBluetoothManager {
                 mHandler.sendEmptyMessageDelayed(UMGlobalParam.MSG_REFRESH_UPDATE_INFO_ERR, 100);
             }
         }
-
     }
 
     public String getCurrentVersion() {

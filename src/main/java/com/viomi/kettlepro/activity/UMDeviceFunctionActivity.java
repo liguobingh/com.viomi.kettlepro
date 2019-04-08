@@ -132,8 +132,6 @@ public class UMDeviceFunctionActivity extends UMBaseActivity {
 
 //        switchButton2.setOnCheckedChangeListener(this);
 
-
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup arg0, int arg1) {
@@ -239,8 +237,7 @@ public class UMDeviceFunctionActivity extends UMBaseActivity {
                 if (!mIgnoreChange) {
 
                     if (isChecked) {
-                        if (UMBluetoothManager.getInstance().getCurrentVersion().length() != 0
-                                && UMBluetoothManager.getInstance().getCurrentVersion().compareToIgnoreCase("6.2.0.8") <= 0) {
+                        if (UMBluetoothManager.getInstance().getCurrentVersion().length() != 0 && UMBluetoothManager.getInstance().getCurrentVersion().compareToIgnoreCase("6.2.0.8") <= 0) {
                             Toast.makeText(activity(), getString(R.string.text_kettle_lift_up_upgrade_tips), Toast.LENGTH_LONG).show();
                             return;
                         }
