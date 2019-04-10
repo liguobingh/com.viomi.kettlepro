@@ -46,8 +46,8 @@
     <string name="button_confirm">OK</string>
 
     <!--初次绑定设备，弹出协议 dialog 对话框-->
-    <string name="um_license_title">User Agreement</string>
-    <string name="um_license_name"> Software License and Service Agreement</string>
+    <string name="um_license_title">User Agreement &amp; Privacy Policy</string>
+    <string name="um_license_name">User Agreement</string>
     <string name="um_conceal_name">Privacy Policy</string>
     <string name="um_licease">license.html</string>
     <string name="um_policy">private.html</string>

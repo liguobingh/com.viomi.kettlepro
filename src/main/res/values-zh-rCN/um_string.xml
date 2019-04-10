@@ -46,9 +46,9 @@
     <string name="button_confirm">确定</string>
 
     <!--绑定设备，弹出协议 dialog 对话框-->
-    <string name="um_license_title">用户使用协议</string>
-    <string name="um_license_name">云米恒温水壶用户协议</string>
-    <string name="um_conceal_name">云米恒温水壶隐私政策</string>
+    <string name="um_license_title">使用条款和隐私政策</string>
+    <string name="um_license_name">使用条款</string>
+    <string name="um_conceal_name">隐私政策</string>
     <string name="um_licease">license.html</string>
     <string name="um_policy">private.html</string>
 
