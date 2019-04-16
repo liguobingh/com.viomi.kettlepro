@@ -405,21 +405,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         setTemp.setInterval(5);// 设置5度为一个间隔
         setTemp.setTextOffset(10);//
         int cur = (mTempCustom - 40) * 30;
-//        setTemp.setCurTemp(cur);
-
-//        setTime.setUnit(" h");// 设置“保温时长”显示单位
-//        setTime.setMax(120);// 设置最长保温时长
-//        setTime.setMin(5);// 设置最短保温时长
-//        setTime.setNumber(20);//
-//        setTime.setInterval(4);// 设置0.5小时为一个间隔
-//        setTime.setTextOffset(10);//
-//        setTime.setRuleScrollEndListener(new VerticalRulerView.RulerScrollEndCallback() {
-//            @Override
-//            public void onRulerScrollEnd(int length, int value) {
-//                float time = (float) value / (float) 10;
-//                setKeepWarmTime(time);
-//            }
-//        });
         setTemp.setRuleScrollEndListener(new VerticalRulerView.RulerScrollEndCallback() {
             @Override
             public void onRulerScrollEnd(int length, int value) {
@@ -477,9 +462,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 Animation.RELATIVE_TO_PARENT,
                 0.5F,
                 Animation.RELATIVE_TO_PARENT, 0.5F);
-//        TranslateAnimation translate = new TranslateAnimation();
         animationSet.addAnimation(rotate);
-//        animationSet.addAnimation(translate);
         return animationSet;
     }
 
@@ -500,7 +483,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     }
 
     private void setKeepWarmTime(float time) {
-//        tvDuration.setText("" + time);
         Log.i("XXX", "time:" + time);
         UMBluetoothManager.getInstance().setKeepWarmTime(time);
         startTimer();
@@ -546,10 +528,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                         TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
                         TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
                         mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
-//                            Window dialogWindow = mlAlertDialog.getWindow();
-//                            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-//                            lp.width = PhoneUtil.dipToPx(activity(), 400);
-//                            dialogWindow.setAttributes(lp);
 
                         buttonCancel.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -570,13 +548,10 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 }
                 break;
             case R.id.rl_duration:
-//                setTime.resetMeasure();
-//                showWindow(setTime);
                 showTimerDialog((int) selectTimerValue * 10);
                 break;
             case R.id.rl_temp:
                 if (mKeyChoose == 255) {
-//                    setTemp.resetMeasure();
                     showWindow(setTemp);
                 } else if (mKeyChoose == 1 || mKeyChoose == 2) {
                     if (ll_mode.getVisibility() == View.GONE && setTemp.getVisibility() == View.GONE) {
@@ -597,11 +572,9 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                             @Override
                             public void onClick(View v) {
                                 mlAlertDialog.dismiss();
-//                                    setTemp.resetMeasure();
                                 showWindow(setTemp);
                             }
                         });
-//                        }
                         mlAlertDialog.show();
                     }
                 }
@@ -629,66 +602,10 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         int flag = mKeyChoose;
         UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
         startTimer();
-//        if (flag == UMGlobalParam.KEY_NULL) {
-//            UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
-//            startTimer();
-//        } else if (flag == UMGlobalParam.KEY_BOIL) {
-//            UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
-//            startTimer();
-//        } else
         if (flag == UMGlobalParam.KEY_KEEP_WARM && mTempCustom != temp) {
             tvKeepTemp.setText("" + mTempCustom);
             UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
             startTimer();
-//            if (mlAlertDialog == null) {
-//                LayoutInflater layoutInflater = LayoutInflater.from(activity());
-//                View view = layoutInflater.inflate(R.layout.um_dialog_work_tip, null);
-//
-//                TextView buttonCancel = (TextView) view.findViewById(R.id.button_cancel);
-//                TextView buttonOk = (TextView) view.findViewById(R.id.button_confirm);
-//                mlAlertDialog = new AlertDialog.Builder(activity()).setView(view).create();
-//                Window dialogWindow = mlAlertDialog.getWindow();
-//                WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-//                lp.width = PhoneUtil.dipToPx(activity(), 400);
-//                dialogWindow.setAttributes(lp);
-//
-//                buttonCancel.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        tvKeepTemp.setText("" + mTempCustom);
-//                        mlAlertDialog.dismiss();
-//                    }
-//                });
-//                buttonOk.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
-//                        mlAlertDialog.dismiss();
-//                        startTimer();
-//                        mIgnoreChange = true;
-//                        switchButton2.setChecked(true);
-//                        mIgnoreChange = false;
-//                    }
-//                });
-//            }
-//            mlAlertDialog.show();
-
-//            mlAlertDialog = new MLAlertDialog.Builder(activity()).setMessage(getString(R.string.toast_keep_warm_temp_set))
-//                    .setNegativeButton(R.string.button_cancel, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-////                            mUmTempSeekbarView.setTemp(mTempCustom);
-//                            tvKeepTemp.setText("" + mTempCustom);
-//                        }
-//                    })
-//                    .setPositiveButton(R.string.button_confirm, new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            UMBluetoothManager.getInstance().onSetup(mHeatModel, temp);
-//                            startTimer();
-//                        }
-//                    }).create();
-//            mlAlertDialog.show();
         }
     }
 
@@ -697,12 +614,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         if (ll_mode.getVisibility() == View.VISIBLE && ll_mode.getId() != view.getId()) {
             stopViewAnim(ll_mode);
             return;
-        }
-//        else if (setTime.getVisibility() == View.VISIBLE && setTime.getId() != view.getId()) {
-//            stopViewAnim(setTime);
-//            return;
-//        }
-        else if (setTemp.getVisibility() == View.VISIBLE && setTemp.getId() != view.getId()) {
+        } else if (setTemp.getVisibility() == View.VISIBLE && setTemp.getId() != view.getId()) {
             stopViewAnim(setTemp);
             return;
         }
@@ -718,12 +630,7 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         if (ll_mode.getVisibility() == View.VISIBLE && ll_mode.getId() != view.getId()) {
             stopViewAnim(ll_mode);
             return;
-        }
-//        else if (setTime.getVisibility() == View.VISIBLE && setTime.getId() != view.getId()) {
-//            stopViewAnim(setTime);
-//            return;
-//        }
-        else if (setTemp.getVisibility() == View.VISIBLE && setTemp.getId() != view.getId()) {
+        } else if (setTemp.getVisibility() == View.VISIBLE && setTemp.getId() != view.getId()) {
             stopViewAnim(setTemp);
             return;
         }
@@ -736,155 +643,15 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 
     private void startViewAnim(final View view) {
         setShowAnimation(view, 1000);
-//        view.setAlpha(0f);
-//        view.setVisibility(View.VISIBLE);
-//        view.animate().alpha(1f)
-//                .setDuration(1000)
-//                .setListener(null).start();
-
-
-//        view.clearAnimation();
-//        view.setVisibility(View.VISIBLE);
-//        Animation animEnter = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_right);
-//        animEnter.setAnimationListener(animEnterListener);
-//        view.startAnimation(animEnter);
-
-//        Log.i("info","====================Alpha:"+view.getAlpha());
-//        view.setVisibility(View.VISIBLE);
-//        view.setAlpha(1f);
-//        final ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.view_enter);
-//        anim.setTarget(view);
-//        anim.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animator) {
-//                isMoving=true;
-//                startAnim();
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//                isMoving=false;
-////                view.setTag(false);
-////                anim.removeAllListeners();
-////                anim.removeAllUpdateListeners();
-////                anim.cancel();
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animator) {
-//
-//            }
-//        });
-//        anim.start();
-//        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                final float value = (Float) valueAnimator.getAnimatedValue();
-//                hideArraws((float) (1.0 - value));
-//            }
-//        });
     }
 
     private void stopViewAnim(final View view) {
         setHideAnimation(view, 600);
-//        view.animate().translationX(300).setDuration(1000).setListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//                view.setVisibility(View.GONE);
-//                view.setTranslationX(0);
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animator) {
-//
-//            }
-//        }).start();
-
-
-//        view.clearAnimation();
-//        Animation animExit = AnimationUtils.loadAnimation(mContext, R.anim.slide_out_right);
-//        animExit.setAnimationListener(animationListener);
-//        view.startAnimation(animExit);
-
-//        ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.view_exit);
-//        anim.setTarget(view);
-//        anim.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animator) {
-//                stopAnim();
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//                showArraws();
-//                if (!isGone(ll_mode)) {
-//                    ll_mode.setTag(true);
-//                }
-//
-//                if (!isGone(setTime)) {
-//                    setTime.setTag(true);
-//                }
-//
-//                if (!isGone(setTemp)) {
-//                    setTemp.setTag(true);
-//                }
-////                if (ll_mode.getAlpha() != 0) {
-////                    ll_mode.setAlpha(0);
-////                }
-////                if (setTime.getAlpha() != 0) {
-////                    setTime.setAlpha(0);
-////                }
-////                if (setTemp.getAlpha() != 0) {
-////                    setTemp.setAlpha(0);
-////                }
-//
-//
-////                if (ll_mode.getVisibility() == View.VISIBLE) {
-////                    ll_mode.setVisibility(View.GONE);
-////                    ll_mode.clearAnimation();
-////                }
-////                if (setTime.getVisibility() == View.VISIBLE) {
-////                    setTime.setVisibility(View.GONE);
-////                    setTime.clearAnimation();
-////                }
-////                if (setTemp.getVisibility() == View.VISIBLE) {
-////                    setTemp.setVisibility(View.GONE);
-////                    setTemp.clearAnimation();
-////                }
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animator) {
-//
-//            }
-//        });
-//        anim.start();
     }
 
     private Animation.AnimationListener animationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
-//            stopAnim();
             showArraws();
         }
 
@@ -894,12 +661,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 ll_mode.setVisibility(View.GONE);
 //                ll_mode.clearAnimation();
             }
-
-//            if (setTime.getVisibility() == View.VISIBLE) {
-//                setTime.setVisibility(View.GONE);
-////                setTime.clearAnimation();
-//            }
-
             if (setTemp.getVisibility() == View.VISIBLE) {
                 setTemp.setVisibility(View.GONE);
 //                setTemp.clearAnimation();
@@ -919,18 +680,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
 
         @Override
         public void onAnimationEnd(Animation animation) {
-//            hideArraws();
-//            switch (choseType) {
-//                case 1:
-//
-//                    break;
-//                case 2:
-//
-//                    break;
-//                case 3:
-//
-//                    break;
-//            }
         }
 
         @Override
@@ -1075,34 +824,11 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         Log.i("XXX", "mSetTime:" + mSetTime + " selectTimerValue:" + selectTimerValue);
 
         tvKeepTemp.setText("" + mTemp);
-//        if (!isDataRefresh) {
-//        setTime.setNumber(((int) mSetTime) * 10);
         setTemp.setNumber(mTemp);
         isDataRefresh = true;
-//        }
-//        mBubbleAnimation.setTemp(currentTemp);
-//        onSpecialStatusShow(mIsOnline,status,mError,currentTemp);
         if (!mDataRefresh) {
             return;
         }
-//        mUmTimeSeekbarView.setTime(mSetTime);
-//        //弹出工作中修改确认窗口时，不刷新设置温度
-//        if(mlAlertDialog==null||(!mlAlertDialog.isShowing())){
-//            mUmTempSeekbarView.setTemp(mTemp);
-//        }
-//
-//        mUMModelSetView.setModel(isBiol);
-//        mUMModelSetView.setBoilModeSelect(boilModeSelect);
-//
-//        if((!mIsLiftUpHold)&&mLiftUpSwitchButton.isChecked()){
-//            mIgnoreChange=true;
-//            mLiftUpSwitchButton.setChecked(false);
-//            mIgnoreChange=false;
-//        }else if(mIsLiftUpHold&&(!mLiftUpSwitchButton.isChecked())){
-//            mIgnoreChange=true;
-//            mLiftUpSwitchButton.setChecked(true);
-//            mIgnoreChange=false;
-//        }
     }
 
     // 获取几种默认模式
@@ -1197,25 +923,10 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                         UMGlobalParam.getInstance().clear();
                         activity().finish();
                     }
-//                    isOnActivity = 0;
-//                    UMBluetoothManager.getInstance().isOnMainActivity(isOnActivity);
                 }
                 break;
         }
     }
-
-//    private void openSubMenu() {
-//        ArrayList<IXmPluginHostActivity.MenuItemBase> item = new ArrayList<IXmPluginHostActivity.MenuItemBase>();
-//        IXmPluginHostActivity.IntentMenuItem intentMenuItem1 = new IXmPluginHostActivity.IntentMenuItem();
-//        intentMenuItem1.name = getString(R.string.um_device_fun);
-//        intentMenuItem1.intent = mHostActivity.getActivityIntent(activity().getPackageName(), UMDeviceFunctionActivity.class.getName());
-////        intentMenuItem1.intent.putExtra("status", mMemoryStatus);
-//        item.add(intentMenuItem1);
-//
-////        IXmPluginHostActivity.IntentMenuItem intentMenuItem = new IXmPluginHostActivity.IntentMenuItem();
-////        intentMenuItem.name=getString(R.string.um_device_fun);
-////        intentMenuItem.intent= mHostActivity.getActivityIntent(activity().getPackageName(),UMDeviceFunctionActivity.class.getName());
-//    }
 
     //传入升级管理
     private void openSubMenu1() {
@@ -1245,8 +956,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
                 commonSettingIntent.putExtra("enableRemoveLicense", true);
                 commonSettingIntent.putExtra("licenseContentUri", mLicenseFile.getAbsolutePath());
                 commonSettingIntent.putExtra("privacyContentUri", mPrivacyFile.getAbsolutePath());
-//           commonSettingIntent.putExtra("licenseContentHtml",getHtmlContent("private_ko.html"));
-//           commonSettingIntent.putExtra("privacyContentHtml",getHtmlContent("private_ko.html"));
             }
         }
         hostActivity().openMoreMenu(items, true, REQUEST_MENUS_SECOND, commonSettingIntent);
@@ -1284,52 +993,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     }
 
     public void setHideAnimation(final View view, int duration) {
-//        if (null == view || duration < 0) {
-//            return;
-//        }
-//
-//        if (null != mHideAnimation) {
-//            mHideAnimation.cancel();
-//        }
-//        // 监听动画结束的操作
-////        mHideAnimation = new AlphaAnimation(1.0f, 0.0f);
-//        mHideAnimation = new TranslateAnimation(0, 120, 0f, 0f);
-//        mHideAnimation.setDuration(duration);
-//        mHideAnimation.setFillAfter(false);
-//        mHideAnimation.setFillBefore(false);
-////        mHideAnimation = AnimationUtils.loadAnimation(mContext, R.anim.slide_out_right);
-//        mHideAnimation.setAnimationListener(new Animation.AnimationListener() {
-//
-//            @Override
-//            public void onAnimationStart(Animation arg0) {
-//                stopAnim();
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animation arg0) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animation arg0) {
-//                Log.i("info", "==================TranslationX:" + view.getTranslationX());
-//                view.requestLayout();
-//                view.invalidate();
-//                view.setVisibility(View.GONE);
-//                view.setTag(true);
-//
-////                if (ll_mode.getVisibility() == View.VISIBLE) {
-////                    ll_mode.setVisibility(View.GONE);
-////                }
-////                if (setTime.getVisibility() == View.VISIBLE) {
-////                    setTime.setVisibility(View.GONE);
-////                }
-////                if (setTemp.getVisibility() == View.VISIBLE) {
-////                    setTemp.setVisibility(View.GONE);
-////                }
-//            }
-//        });
-//        view.startAnimation(mHideAnimation);
         ObjectAnimator anim = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.view_exit);
         anim.setTarget(view);
         anim.addListener(new Animator.AnimatorListener() {
@@ -1390,18 +1053,6 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         });
         view.startAnimation(mShowAnimation);
     }
-
-//    private void lisenseInit() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                copyLicenseFile();
-//                if (mHandler != null) {
-//                    mHandler.sendEmptyMessage(MSG_WHAT_INIT_LICENSE);
-//                }
-//            }
-//        }).start();
-//    }
 
     /***
      * 复制隐私协议文件到sdcard里
