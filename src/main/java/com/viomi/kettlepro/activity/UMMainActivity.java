@@ -323,37 +323,12 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
         rl_temp.setOnClickListener(this);
 
         ll_mode.setTag(false);
-//        setTime.setTag(false);
         setTemp.setTag(false);
 
-//        ll_mode.setAlpha(0);
-//        setTime.setAlpha(0);
-//        setTemp.setAlpha(0);
-
         ll_mode.setVisibility(View.GONE);
-//        setTime.setVisibility(View.GONE);
         setTemp.setVisibility(View.GONE);
 
-        bluStatus = XmBluetoothManager.getInstance().isBluetoothOpen();
-//        log.d("@@@@@", "bluStatus:" + bluStatus);
-        connState = XmBluetoothManager.getInstance().getConnectStatus(mDeviceStat.mac);
-//        log.d("@@@@@", "connState:" + connState);
-
-        if (bluStatus == false) {
-            tvStatus.setText(getString(R.string.um_status_close));
-            tag1.setText(getString(R.string.um_status_bluetooth_close));
-            tvTemp.setVisibility(View.GONE);
-            bluOff.setVisibility(View.VISIBLE);
-            bluOff.setImageDrawable(getDrawable(R.drawable.blu_off));
-            tvMode.setText(getString(R.string.um_cur_temp_default));
-        } else if (bluStatus == true && (connState == STATE_UNKNOWN || connState == STATE_CONNECTING || connState == STATE_DISCONNECTED || connState == STATE_DISCONNECTING)) {
-            tvStatus.setText(getString(R.string.um_status_close));
-            tag1.setText(getString(R.string.un_status_disconnected));
-            tvTemp.setVisibility(View.GONE);
-            bluOff.setVisibility(View.VISIBLE);
-            bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
-            tvMode.setText(getString(R.string.um_cur_temp_default));
-        }
+        setOfflineView();
         setUpView();
         initRulerView();
     }
@@ -383,17 +358,32 @@ public class UMMainActivity extends XmPluginBaseActivity implements View.OnClick
     }
 
     /**
+     * 初始化进入主界面、在主界面使用过程中对蓝牙开关、连接状态进行监控反馈
      * 离线时界面显示
      */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void setOfflineView() {
-        tvStatus.setText(getString(R.string.um_status_close));
-        tag1.setText(getString(R.string.un_status_disconnected));
-        tvTemp.setVisibility(View.GONE);
-        tvKeepTemp.setText(getResources().getText(R.string.um_cur_temp_default));
-        tvDuration.setText(getResources().getText(R.string.um_cur_temp_default));
-        bluOff.setVisibility(View.VISIBLE);
-        bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
-        tvMode.setText(getString(R.string.um_cur_temp_default));
+        bluStatus = XmBluetoothManager.getInstance().isBluetoothOpen();
+        connState = XmBluetoothManager.getInstance().getConnectStatus(mDeviceStat.mac);
+        if (bluStatus == false) {
+            tvStatus.setText(getString(R.string.um_status_close));
+            tag1.setText(getString(R.string.um_status_bluetooth_close));
+            tvTemp.setVisibility(View.GONE);
+            bluOff.setVisibility(View.VISIBLE);
+            bluOff.setImageDrawable(getDrawable(R.drawable.blu_off));
+            tvKeepTemp.setText(getResources().getText(R.string.um_cur_temp_default));
+            tvDuration.setText(getResources().getText(R.string.um_cur_temp_default));
+            tvMode.setText(getString(R.string.um_cur_temp_default));
+        } else if (bluStatus == true && (connState == STATE_UNKNOWN || connState == STATE_CONNECTING || connState == STATE_DISCONNECTED || connState == STATE_DISCONNECTING)) {
+            tvStatus.setText(getString(R.string.um_status_close));
+            tag1.setText(getString(R.string.un_status_disconnected));
+            tvTemp.setVisibility(View.GONE);
+            bluOff.setVisibility(View.VISIBLE);
+            bluOff.setImageDrawable(getDrawable(R.drawable.blu_disconected));
+            tvKeepTemp.setText(getResources().getText(R.string.um_cur_temp_default));
+            tvDuration.setText(getResources().getText(R.string.um_cur_temp_default));
+            tvMode.setText(getString(R.string.um_cur_temp_default));
+        }
     }
 
     // 初始化 温度刻度尺 视图
